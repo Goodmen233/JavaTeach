@@ -1,0 +1,13 @@
+server:
+  servlet:
+    context-path: /JavaTeach
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://8.130.19.242:3306/java_teach?useUnicode=true&characterEncoding=utf8&serverTimezone=UTC&useSSL=false&autoReconnect=true
+    username: root
+    password: passw0rd
+
+mybatis:
+  mapper-locations: mapper/*Mapper.xml
