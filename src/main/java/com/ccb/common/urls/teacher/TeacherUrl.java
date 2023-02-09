@@ -1,13 +1,25 @@
-package com.ccb.constants.url;
+package com.ccb.common.urls.teacher;
+
+import com.ccb.common.urls.UserUrl;
 
 /**
- * @Description: 课程管理url
+ * @Description: 教师url
  * @Author: CCB
- * @Date: 2023/2/8 17:07
+ * @Date: 2023/2/9 14:17
  */
-public class CourseManageUrlConstant extends UserUrlConstant {
+public class TeacherUrl  extends UserUrl {
 
-    private static final String PREFIX = "/courseManage";
+    private static final String PREFIX = "/teacher";
+
+    /**
+     * 个人中心详情
+     */
+    public static final String PERSONAL_CENTER = PREFIX + "/personalCenter";
+
+    /**
+     * 个人中心修改
+     */
+    public static final String PERSONAL_CENTER_MODIFY = PERSONAL_CENTER + "/modify";
 
     /**
      * 课程发布/修改

@@ -1,4 +1,4 @@
-package com.ccb.constants.url;
+package com.ccb.common.urls;
 
 /**
  * @Description: 用户账户体系url
@@ -6,7 +6,7 @@ package com.ccb.constants.url;
  * @Author: CCB
  * @Date: 2023/2/8 16:22
  */
-public class UserUrlConstant {
+public class UserUrl {
 
     /**
      * 前缀
@@ -19,29 +19,19 @@ public class UserUrlConstant {
     public static final String LOGIN = PREFIX + "/login";
 
     /**
-     * 注册详情
-     */
-    public static final String REGISTER_DETAIL = PREFIX + "/registerDetail";
-
-    /**
      * 注册
      */
     public static final String REGISTER = PREFIX + "/register";
 
     /**
+     * 注册信息提交
+     */
+    public static final String REGISTER_SUBMIT = REGISTER + "/submit";
+
+    /**
      * 修改密码
      */
     public static final String UPDATE_PASSWORD = PREFIX + "/updatePassword";
-
-    /**
-     * 个人中心详情
-     */
-    public static final String PERSONAL_CENTER = PREFIX + "/personalCenter";
-
-    /**
-     * 个人中心修改
-     */
-    public static final String PERSONAL_CENTER_MODIFY = PERSONAL_CENTER + "/modify";
 
     /**
      * 课程页面信息
@@ -54,7 +44,7 @@ public class UserUrlConstant {
     public static final String CHAPTER_TREE = PREFIX + "/chapterTree";
 
     /**
-     * 课程章节内容详情
+     * 课程章节内容
      */
     public static final String CHAPTER_CONTENT = PREFIX + "/chapterContent";
 

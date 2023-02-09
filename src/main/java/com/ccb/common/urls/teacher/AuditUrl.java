@@ -1,11 +1,11 @@
-package com.ccb.constants.url;
+package com.ccb.common.urls.teacher;
 
 /**
  * @Description: 审核模块url
  * @Author: CCB
  * @Date: 2023/2/8 16:57
  */
-public class AuditUrlConstant {
+public class AuditUrl {
 
     /**
      * 前缀
