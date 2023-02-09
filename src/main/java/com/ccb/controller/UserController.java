@@ -80,6 +80,8 @@ public class UserController {
     @GetMapping(UserUrl.EXERCISE)
     @ResponseBody
     public ResultInfo<ExerciseResp> exercise(ExerciseReq exerciseReq) {
+        // 学生需要返回解答情况
+        // 老师返回已经答题人数？
         return ResultInfo.success();
     }
 

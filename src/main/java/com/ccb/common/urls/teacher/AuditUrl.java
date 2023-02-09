@@ -8,22 +8,22 @@ package com.ccb.common.urls.teacher;
 public class AuditUrl {
 
     /**
-     * 前缀
+     * 审核列表
      */
-    private static final String PREFIX = "/audit";
+    public static final String AUDIT = "/audit";
 
     /**
      * 审核详情
      */
-    public static final String DETAIL = PREFIX + "/detail";
+    public static final String DETAIL = AUDIT + "/detail";
 
     /**
      * 审核通过
      */
-    public static final String PASS = PREFIX + "/pass";
+    public static final String PASS = AUDIT + "/pass";
 
     /**
      * 审核失败(不通过)
      */
-    public static final String FAIL = PREFIX + "/fail";
+    public static final String FAIL = AUDIT + "/fail";
 }
