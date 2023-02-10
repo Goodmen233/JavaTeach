@@ -39,7 +39,6 @@ public class MethodAspect {
         Method method = signature.getMethod();
         try {
             Object[] args = joinPoint.getArgs();
-            //IP地址
             String methodName = method.getName();
             Map<String, Object> map = new HashMap<>(8);
             DefaultParameterNameDiscoverer discoverer = new DefaultParameterNameDiscoverer();
