@@ -21,7 +21,7 @@ public class RedisUtil {
 	
    private static final Logger logger = LoggerFactory.getLogger(RedisUtil.class);
 
-	private static final RedisTemplate<Serializable, Serializable> REDIS_TEMPLATE = SpringContextHolder.getBean(RedisTemplate.class);
+	private static final RedisTemplate<Serializable, Serializable> REDIS_TEMPLATE = SpringContextHolder.getBean("redisTemplate", RedisTemplate.class);
 	
 	/**
      * 前缀

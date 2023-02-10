@@ -1,20 +1,16 @@
 package com.ccb;
 
-import static org.junit.Assert.assertTrue;
+import com.ccb.common.utils.RedisUtil;
+import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.util.Assert;
 
-import org.junit.Test;
-
-/**
- * Unit test for simple App.
- */
+@SpringBootTest(classes = {App.class})
 public class AppTest 
 {
-    /**
-     * Rigorous Test :-)
-     */
     @Test
-    public void shouldAnswerWithTrue()
-    {
-        assertTrue( true );
+    public void test() {
+        RedisUtil.cacheValue("haha", "hello");
+        Assert.isTrue("hello".equals(RedisUtil.getValue("haha")));
     }
 }
