@@ -52,16 +52,6 @@ public class TeacherUrl  extends UserUrl {
     public static final String CHAPTER_CONTENT_DELETE = CHAPTER_CONTENT + "/delete";
 
     /**
-     * 课程资料修改
-     */
-    public static final String RESOURCE_MODIFY = RESOURCE + "/modify";
-
-    /**
-     * 课程资料删除
-     */
-    public static final String RESOURCE_DELETE = RESOURCE + "/delete";
-
-    /**
      * 作业/练习发布
      */
     public static final String EXERCISE_PUBLISH = EXERCISE + "/publish";
