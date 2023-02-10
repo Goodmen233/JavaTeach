@@ -1,5 +1,6 @@
 package com.ccb.controller;
 
+import com.ccb.common.urls.CommonUrl;
 import com.ccb.common.urls.UserUrl;
 import com.ccb.domain.common.ResultInfo;
 import com.ccb.domain.vo.req.user.*;
@@ -49,35 +50,35 @@ public class UserController {
     }
 
     @ApiOperation("修改密码")
-    @PostMapping(UserUrl.UPDATE_PASSWORD)
+    @PostMapping(CommonUrl.UPDATE_PASSWORD)
     @ResponseBody
     public ResultInfo<Boolean> updatePassword(@RequestBody UpdatePasswordReq updatePasswordReq) {
         return ResultInfo.success();
     }
 
     @ApiOperation("课程列表信息")
-    @GetMapping(UserUrl.COURSE)
+    @GetMapping(CommonUrl.COURSE)
     @ResponseBody
     public ResultInfo<CourseResp> course(CourseReq courseReq) {
         return ResultInfo.success();
     }
 
     @ApiOperation("课程章节树信息")
-    @GetMapping(UserUrl.CHAPTER_TREE)
+    @GetMapping(CommonUrl.CHAPTER_TREE)
     @ResponseBody
     public ResultInfo<ChapterTreeResp> chapterTree(ChapterTreeReq chapterTreeReq) {
         return ResultInfo.success();
     }
 
     @ApiOperation("课程章节内容")
-    @GetMapping(UserUrl.CHAPTER_CONTENT)
+    @GetMapping(CommonUrl.CHAPTER_CONTENT)
     @ResponseBody
     public ResultInfo<ChapterContentResp> chapterContent(ChapterContentReq chapterContentReq) {
         return ResultInfo.success();
     }
 
     @ApiOperation("作业/练习信息")
-    @GetMapping(UserUrl.EXERCISE)
+    @GetMapping(CommonUrl.EXERCISE)
     @ResponseBody
     public ResultInfo<ExerciseResp> exercise(ExerciseReq exerciseReq) {
         // 学生需要返回解答情况
@@ -86,30 +87,37 @@ public class UserController {
     }
 
     @ApiOperation("课程资料")
-    @GetMapping(UserUrl.RESOURCE)
+    @GetMapping(CommonUrl.RESOURCE)
     @ResponseBody
     public ResultInfo<ResourceResp> resource(ResourceReq resourceReq) {
         return ResultInfo.success();
     }
 
     @ApiOperation("交流详情")
-    @GetMapping(UserUrl.COMMUNICATION)
+    @GetMapping(CommonUrl.COMMUNICATION)
     @ResponseBody
     public ResultInfo<CommunicationResp> communication(CommunicationReq communicationReq) {
         return ResultInfo.success();
     }
 
     @ApiOperation("发布交流")
-    @PostMapping(UserUrl.COMMUNICATION_PUBLISH)
+    @PostMapping(CommonUrl.COMMUNICATION_PUBLISH)
     @ResponseBody
     public ResultInfo<Boolean> communicationPublish(@RequestBody CommunicationPublishReq communicationPublishReq) {
         return ResultInfo.success();
     }
 
     @ApiOperation("删除交流")
-    @PostMapping(UserUrl.COMMUNICATION_DELETE)
+    @PostMapping(CommonUrl.COMMUNICATION_DELETE)
     @ResponseBody
     public ResultInfo<Boolean> communicationDelete(@RequestBody CommunicationDeleteReq communicationDeleteReq) {
+        return ResultInfo.success();
+    }
+
+    @ApiOperation("话题页面信息")
+    @PostMapping(CommonUrl.TOPIC)
+    @ResponseBody
+    public ResultInfo<TopicResp> topic(@RequestBody TopicReq topicReq) {
         return ResultInfo.success();
     }
 }

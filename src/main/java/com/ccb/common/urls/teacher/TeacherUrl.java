@@ -1,13 +1,13 @@
 package com.ccb.common.urls.teacher;
 
-import com.ccb.common.urls.UserUrl;
+import com.ccb.common.urls.CommonUrl;
 
 /**
  * @Description: 教师url
  * @Author: CCB
  * @Date: 2023/2/9 14:17
  */
-public class TeacherUrl  extends UserUrl {
+public class TeacherUrl  extends CommonUrl {
 
     private static final String PREFIX = "/teacher";
 

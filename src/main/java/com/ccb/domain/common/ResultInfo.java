@@ -30,6 +30,11 @@ public class ResultInfo<T> implements Serializable {
     public static final int RESULT_CODE_COMMON_ERR = 9999;
 
     /**
+     * 应答结果状态码—登录token无效
+     */
+    public static final int TOKEN_ERROR = 24;
+
+    /**
      * 返回状态，默认0成功
      */
     @ApiModelProperty(value = "返回状态")
@@ -47,6 +52,15 @@ public class ResultInfo<T> implements Serializable {
     @ApiModelProperty(value = "返回数据")
     private T data;
 
+    /**
+     * 返回一个默认的微信token错误结果
+     *
+     * @return 错误结果
+     */
+    public static ResultInfo tokenError() {
+        ResultInfo res = new ResultInfo(TOKEN_ERROR, "Token Error");
+        return res;
+    }
 
     /**
      * 返回一个默认的错误结果

@@ -8,6 +8,18 @@ spring:
     url: jdbc:mysql://8.130.19.242:3306/java_teach?useUnicode=true&characterEncoding=utf8&serverTimezone=UTC&useSSL=false&autoReconnect=true
     username: root
     password: passw0rd
+  redis:
+    host: 8.130.19.242
+    port: 6379
+    password: passw0rd
+    database: 0
+    timeout: 5000
+    lettuce:
+      pool:
+        max-idle: 8
+        min-idle: 1
+        max-wait: 10000
+        max-active: 8
 
 mybatis:
   mapper-locations: mapper/*Mapper.xml

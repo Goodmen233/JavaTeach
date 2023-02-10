@@ -6,4 +6,9 @@ package com.ccb.common.urls;
  * @Date: 2023/2/8 17:50
  */
 public class FileUrl {
+
+    /**
+     * 前缀
+     */
+    private final static String PREFIX = "/file";
 }
