@@ -1,6 +1,5 @@
 package com.ccb.domain.vo.req.teacher;
 
-import com.ccb.domain.common.CommonReq;
 import io.swagger.annotations.ApiModel;
 import lombok.Data;
 
@@ -11,5 +10,11 @@ import lombok.Data;
  */
 @Data
 @ApiModel("作业/练习发布入参")
-public class ExercisePublishReq extends CommonReq {
+public class ExercisePublishReq {
+    /*
+    exerciseId
+    List<ProblemPO>
+            |
+           List<ChoicePO>
+     */
 }

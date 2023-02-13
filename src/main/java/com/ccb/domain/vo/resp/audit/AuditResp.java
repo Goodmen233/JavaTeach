@@ -11,5 +11,8 @@ import lombok.Data;
 @Data
 @ApiModel("审核列表出参")
 public class AuditResp {
-
+    /*
+    id
+    待审核人name
+     */
 }

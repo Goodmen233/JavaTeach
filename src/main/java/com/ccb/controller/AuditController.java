@@ -31,7 +31,7 @@ public class AuditController {
     @ApiOperation("待审核列表")
     @GetMapping(AuditUrl.AUDIT)
     @ResponseBody
-    public ResultInfo<AuditResp> audit(AuditReq auditReq) {
+    public ResultInfo<AuditResp> audit() {
         return ResultInfo.success();
     }
 

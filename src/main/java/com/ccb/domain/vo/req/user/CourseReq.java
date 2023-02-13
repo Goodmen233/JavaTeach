@@ -1,6 +1,7 @@
 package com.ccb.domain.vo.req.user;
 
 import com.ccb.domain.common.CommonReq;
+import com.ccb.domain.common.PageReq;
 import io.swagger.annotations.ApiModel;
 import lombok.Data;
 
@@ -11,6 +12,6 @@ import lombok.Data;
  */
 @Data
 @ApiModel("课程详情入参")
-public class CourseReq extends CommonReq {
+public class CourseReq extends PageReq {
 
 }

@@ -11,4 +11,8 @@ import lombok.Data;
 @Data
 @ApiModel("章节树出参")
 public class ChapterTreeResp {
+
+    // TODO 1 1.1 1.1.1 1.2顺序返回
+    // private List<ChapterTreeBO> chapterTreeBOList;
+
 }

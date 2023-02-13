@@ -4,6 +4,7 @@ import com.ccb.common.urls.CommonUrl;
 import com.ccb.common.urls.UserUrl;
 import com.ccb.domain.common.ResultInfo;
 import com.ccb.domain.vo.req.user.*;
+import com.ccb.domain.vo.resp.CommentResp;
 import com.ccb.domain.vo.resp.user.*;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -14,6 +15,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import java.util.List;
 
 /**
  * @Description: 登录接口
@@ -37,7 +40,7 @@ public class UserController {
     @PostMapping(UserUrl.REGISTER)
     @ResponseBody
     public ResultInfo<RegisterResp> register(@RequestBody RegisterReq registerReq) {
-        // 只注册学生和老师共用的属性(班级信息只有学生才有)
+
         return ResultInfo.success();
     }
 
@@ -45,7 +48,7 @@ public class UserController {
     @PostMapping(UserUrl.REGISTER_SUBMIT)
     @ResponseBody
     public ResultInfo<Boolean> registerSubmit(@RequestBody RegisterSubmitReq registerSubmitReq) {
-        // 学生注册需要关联班级,教师不用(在注册后登录在个人中心创建班级供学生选择)
+
         return ResultInfo.success();
     }
 
@@ -80,9 +83,8 @@ public class UserController {
     @ApiOperation("作业/练习信息")
     @GetMapping(CommonUrl.EXERCISE)
     @ResponseBody
-    public ResultInfo<ExerciseResp> exercise(ExerciseReq exerciseReq) {
-        // 学生需要返回解答情况
-        // 老师返回已经答题人数？
+    public ResultInfo<List<ExerciseResp>> exercise(ExerciseReq exerciseReq) {
+
         return ResultInfo.success();
     }
 
@@ -93,31 +95,54 @@ public class UserController {
         return ResultInfo.success();
     }
 
-    @ApiOperation("交流详情")
-    @GetMapping(CommonUrl.COMMUNICATION)
+    @ApiOperation("讨论详情")
+    @GetMapping(CommonUrl.FORUM)
     @ResponseBody
-    public ResultInfo<CommunicationResp> communication(CommunicationReq communicationReq) {
+    public ResultInfo<ForumResp> forum(ForumReq forumReq) {
         return ResultInfo.success();
     }
 
-    @ApiOperation("发布交流")
-    @PostMapping(CommonUrl.COMMUNICATION_PUBLISH)
+    @ApiOperation("评论详情")
+    @GetMapping(CommonUrl.COMMENT)
     @ResponseBody
-    public ResultInfo<Boolean> communicationPublish(@RequestBody CommunicationPublishReq communicationPublishReq) {
+    public ResultInfo<CommentResp> comment(CommentReq commentReq) {
         return ResultInfo.success();
     }
 
-    @ApiOperation("删除交流")
-    @PostMapping(CommonUrl.COMMUNICATION_DELETE)
+    @ApiOperation("发布评论")
+    @GetMapping(CommonUrl.COMMENT_PUBLISH)
     @ResponseBody
-    public ResultInfo<Boolean> communicationDelete(@RequestBody CommunicationDeleteReq communicationDeleteReq) {
+    public ResultInfo<Boolean> commentPublish(CommentPublishReq commentPublishReq) {
         return ResultInfo.success();
     }
 
-    @ApiOperation("话题页面信息")
+    @ApiOperation("评论删除")
+    @GetMapping(CommonUrl.COMMENT)
+    @ResponseBody
+    public ResultInfo<Boolean> comment(CommentDeleteReq commentDeleteReq) {
+        return ResultInfo.success();
+    }
+
+    @ApiOperation("发布讨论")
+    @PostMapping(CommonUrl.FORUM_PUBLISH)
+    @ResponseBody
+    public ResultInfo<Boolean> forumPublish(@RequestBody ForumPublishReq forumPublishReq) {
+        return ResultInfo.success();
+    }
+
+    @ApiOperation("删除讨论")
+    @PostMapping(CommonUrl.FORUM_DELETE)
+    @ResponseBody
+    public ResultInfo<Boolean> forumDelete(@RequestBody ForumDeleteReq forumDeleteReq) {
+        return ResultInfo.success();
+    }
+
+    @ApiOperation("分享页面信息")
     @PostMapping(CommonUrl.TOPIC)
     @ResponseBody
-    public ResultInfo<TopicResp> topic(@RequestBody TopicReq topicReq) {
+    public ResultInfo<ShareResp> share(@RequestBody ShareReq shareReq) {
         return ResultInfo.success();
     }
+
+    // TODO 根据token获取用户信息（包括头像）
 }

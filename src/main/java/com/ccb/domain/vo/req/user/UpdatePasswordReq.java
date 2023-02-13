@@ -1,7 +1,7 @@
 package com.ccb.domain.vo.req.user;
 
-import com.ccb.domain.common.CommonReq;
 import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 /**
@@ -11,5 +11,14 @@ import lombok.Data;
  */
 @Data
 @ApiModel("修改密码入参")
-public class UpdatePasswordReq extends CommonReq {
+public class UpdatePasswordReq {
+
+    @ApiModelProperty("邮箱")
+    private String email;
+
+    @ApiModelProperty("验证码")
+    private String verificationCode;
+
+    @ApiModelProperty("新密码")
+    private String newPwd;
 }

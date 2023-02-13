@@ -11,4 +11,7 @@ import lombok.Data;
 @Data
 @ApiModel("审核详情出参")
 public class AuditDetailResp {
+    /*
+    被审核人PO
+     */
 }

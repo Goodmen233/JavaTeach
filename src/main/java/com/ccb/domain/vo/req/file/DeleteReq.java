@@ -11,4 +11,9 @@ import lombok.Data;
 @Data
 @ApiModel("文件删除入参")
 public class DeleteReq {
+
+    /*
+    文件id
+     */
+
 }

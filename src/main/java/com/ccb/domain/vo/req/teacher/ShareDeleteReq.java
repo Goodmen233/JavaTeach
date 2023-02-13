@@ -5,11 +5,11 @@ import io.swagger.annotations.ApiModel;
 import lombok.Data;
 
 /**
- * @Description: 教师个人中心入参
+ * @Description: 分享删除入参
  * @Author: CCB
- * @Date: 2023/2/10 10:30
+ * @Date: 2023/2/10 10:45
  */
 @Data
-@ApiModel("教师个人中心入参")
-public class PersonalCenterReq extends CommonReq {
+@ApiModel("分享删除入参")
+public class ShareDeleteReq {
 }

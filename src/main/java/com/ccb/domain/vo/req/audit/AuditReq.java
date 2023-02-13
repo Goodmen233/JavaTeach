@@ -1,6 +1,5 @@
 package com.ccb.domain.vo.req.audit;
 
-import com.ccb.domain.common.CommonReq;
 import io.swagger.annotations.ApiModel;
 import lombok.Data;
 
@@ -11,5 +10,6 @@ import lombok.Data;
  */
 @Data
 @ApiModel("审核列表入参")
-public class AuditReq extends CommonReq {
+public class AuditReq {
+
 }

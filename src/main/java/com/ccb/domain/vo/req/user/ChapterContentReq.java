@@ -1,6 +1,7 @@
 package com.ccb.domain.vo.req.user;
 
 import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 /**
@@ -11,4 +12,7 @@ import lombok.Data;
 @Data
 @ApiModel("章节内容入参")
 public class ChapterContentReq {
+
+    @ApiModelProperty("章节内容id")
+    private Long chapterContentId;
 }

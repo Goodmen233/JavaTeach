@@ -11,4 +11,7 @@ import lombok.Data;
 @Data
 @ApiModel("审核不通过入参")
 public class AuditFailReq {
+    /*
+    被审核人id
+     */
 }

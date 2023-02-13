@@ -29,7 +29,7 @@ public class TeacherController {
     @ApiOperation("教师个人中心详情")
     @GetMapping(TeacherUrl.PERSONAL_CENTER)
     @ResponseBody
-    public ResultInfo<PersonalCenterResp> personalCenter(PersonalCenterReq personalCenterReq) {
+    public ResultInfo<PersonalCenterResp> personalCenter() {
         return ResultInfo.success();
     }
 
@@ -54,7 +54,7 @@ public class TeacherController {
         return ResultInfo.success();
     }
 
-    @ApiOperation("课程章节树修改")
+    @ApiOperation("课程章节树新增/修改")
     @PostMapping(TeacherUrl.CHAPTER_TREE_MODIFY)
     @ResponseBody
     public ResultInfo<Boolean> chapterTreeModify(@RequestBody ChapterTreeModifyReq chapterTreeModifyReq) {
@@ -68,7 +68,7 @@ public class TeacherController {
         return ResultInfo.success();
     }
 
-    @ApiOperation("课程章节内容修改")
+    @ApiOperation("课程章节内容新增/修改")
     @PostMapping(TeacherUrl.CHAPTER_CONTENT_MODIFY)
     @ResponseBody
     public ResultInfo<Boolean> chapterContentModify(@RequestBody ChapterContentModifyReq chapterContentModifyReq) {
@@ -97,20 +97,17 @@ public class TeacherController {
     }
 
     @ApiOperation("话题发布/修改")
-    @PostMapping(TeacherUrl.TOPIC_PUBLISH)
+    @PostMapping(TeacherUrl.SHARE_PUBLISH)
     @ResponseBody
-    public ResultInfo<Boolean> topicPublish(@RequestBody TopicPublishReq topicPublishReq) {
+    public ResultInfo<Boolean> sharePublish(@RequestBody SharePublishReq topicPublishReq) {
         return ResultInfo.success();
     }
 
-    @ApiOperation("话题删除")
-    @PostMapping(TeacherUrl.TOPIC_DELETE)
+    @ApiOperation("分享删除")
+    @PostMapping(TeacherUrl.SHARE_DELETE)
     @ResponseBody
-    public ResultInfo<Boolean> topicDelete(@RequestBody TopicDeleteReq topicDeleteReq) {
+    public ResultInfo<Boolean> shareDelete(@RequestBody SharePublishReq topicDeleteReq) {
         return ResultInfo.success();
     }
-
-
-
 
 }

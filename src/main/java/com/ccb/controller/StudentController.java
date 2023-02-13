@@ -5,7 +5,6 @@ import com.ccb.domain.common.ResultInfo;
 import com.ccb.domain.vo.req.student.ExerciseDetailReq;
 import com.ccb.domain.vo.req.student.ExerciseSubmitReq;
 import com.ccb.domain.vo.req.student.PersonalCenterModifyReq;
-import com.ccb.domain.vo.req.student.PersonalCenterReq;
 import com.ccb.domain.vo.resp.student.ExerciseDetailResp;
 import com.ccb.domain.vo.resp.student.PersonalCenterResp;
 import io.swagger.annotations.Api;
@@ -32,7 +31,7 @@ public class StudentController {
     @ApiOperation("个人中心详情")
     @GetMapping(StudentUrl.PERSONAL_CENTER)
     @ResponseBody
-    public ResultInfo<PersonalCenterResp> personalCenter(PersonalCenterReq personalCenterReq) {
+    public ResultInfo<PersonalCenterResp> personalCenter() {
         return ResultInfo.success();
     }
 
@@ -43,7 +42,7 @@ public class StudentController {
         return ResultInfo.success();
     }
 
-    @ApiOperation("作业/练习模块提交/修改")
+    @ApiOperation("作业/练习模块提交")
     @PostMapping(StudentUrl.EXERCISE_SUBMIT)
     @ResponseBody
     public ResultInfo<Boolean> exerciseSubmit(@RequestBody ExerciseSubmitReq exerciseSubmitReq) {

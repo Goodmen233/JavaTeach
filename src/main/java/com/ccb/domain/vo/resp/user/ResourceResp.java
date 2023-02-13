@@ -11,4 +11,7 @@ import lombok.Data;
 @Data
 @ApiModel("课程资料出参")
 public class ResourceResp {
+
+    // TODO @ApiModelProperty("文件列表")
+    // private List<FilePO> fileList;
 }

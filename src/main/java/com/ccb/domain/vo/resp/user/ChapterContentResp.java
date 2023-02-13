@@ -1,7 +1,10 @@
 package com.ccb.domain.vo.resp.user;
 
 import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
+
+import java.util.List;
 
 /**
  * @Description: 章节内容出参
@@ -11,4 +14,11 @@ import lombok.Data;
 @Data
 @ApiModel("章节内容出参")
 public class ChapterContentResp {
+
+    @ApiModelProperty("课程内容id")
+    private Long contentId;
+
+    @ApiModelProperty("课程内容")
+    private String content;
+
 }

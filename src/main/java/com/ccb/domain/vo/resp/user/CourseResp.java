@@ -12,4 +12,9 @@ import lombok.Data;
 @Data
 @ApiModel("课程列表出参")
 public class CourseResp {
+
+    // TODO 分装分页返回
+//    private List<CoursePO> coursePOList;
+//
+//    private Integer total;
 }

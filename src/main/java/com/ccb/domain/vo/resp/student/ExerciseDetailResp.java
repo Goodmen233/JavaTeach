@@ -11,4 +11,13 @@ import lombok.Data;
 @Data
 @ApiModel("作业/练习解答详情出参")
 public class ExerciseDetailResp {
+    /*
+    exerciseId
+    List<BO>
+        |
+        problemId
+        problemContent
+        studentAnswer
+        rightAnswer
+     */
 }

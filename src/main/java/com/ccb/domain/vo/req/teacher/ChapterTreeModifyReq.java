@@ -11,4 +11,11 @@ import lombok.Data;
 @Data
 @ApiModel("章节树修改入参")
 public class ChapterTreeModifyReq {
+    /*
+    id
+    no
+    name
+    superId
+    courseId
+     */
 }

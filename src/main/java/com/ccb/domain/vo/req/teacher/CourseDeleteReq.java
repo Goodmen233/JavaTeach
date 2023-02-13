@@ -11,5 +11,8 @@ import lombok.Data;
  */
 @Data
 @ApiModel("课程删除入参")
-public class CourseDeleteReq extends CommonReq {
+public class CourseDeleteReq {
+    /*
+    id
+     */
 }

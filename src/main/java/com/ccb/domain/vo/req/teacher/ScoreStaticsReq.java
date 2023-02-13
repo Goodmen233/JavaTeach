@@ -11,5 +11,8 @@ import lombok.Data;
  */
 @Data
 @ApiModel("成绩统计模块入参")
-public class ScoreStaticsReq extends CommonReq {
+public class ScoreStaticsReq {
+    /*
+    courseId
+     */
 }

@@ -11,4 +11,11 @@ import lombok.Data;
 @Data
 @ApiModel("文件上传入参")
 public class UploadReq {
+
+    /*
+    id
+    multipartfile
+    link_id
+    link_type
+     */
 }

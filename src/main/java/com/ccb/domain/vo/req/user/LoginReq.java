@@ -21,4 +21,7 @@ public class LoginReq {
 
     @ApiModelProperty("密码")
     private String password;
+
+    // TODO @ApiModelProperty("用户类型: ") 枚举
+    private Integer type;
 }

@@ -43,19 +43,34 @@ public class CommonUrl {
     public static final String RESOURCE = PREFIX + "/resource";
 
     /**
-     * 交流模块
+     * 讨论模块
      */
-    public static final String COMMUNICATION = PREFIX + "/communication";
+    public static final String FORUM = PREFIX + "/forum";
 
     /**
-     * 发布交流
+     * 评论列表
      */
-    public static final String COMMUNICATION_PUBLISH = COMMUNICATION + "/publish";
+    public static final String COMMENT = PREFIX + "/comment";
 
     /**
-     * 删除交流
+     * 评论发布
      */
-    public static final String COMMUNICATION_DELETE = COMMUNICATION + "/delete";
+    public static final String COMMENT_PUBLISH = COMMENT + "/publish";
+
+    /**
+     * 评论删除
+     */
+    public static final String COMMENT_DELETE = COMMENT + "/delete";
+
+    /**
+     * 发布讨论
+     */
+    public static final String FORUM_PUBLISH = FORUM + "/publish";
+
+    /**
+     * 删除讨论
+     */
+    public static final String FORUM_DELETE = FORUM + "/delete";
 
     /**
      * 话题模块

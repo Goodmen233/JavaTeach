@@ -11,5 +11,8 @@ import lombok.Data;
  */
 @Data
 @ApiModel("审核详情入参")
-public class AuditDetailReq extends CommonReq {
+public class AuditDetailReq {
+    /*
+    被审核人id
+     */
 }

@@ -11,5 +11,8 @@ import lombok.Data;
 @Data
 @ApiModel("文件列表入参")
 public class ViewReq {
-
+    /*
+    id(课程-用于显示资料，文章内容-显示上传的附件)
+    type
+     */
 }

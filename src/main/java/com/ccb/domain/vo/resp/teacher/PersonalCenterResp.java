@@ -11,4 +11,15 @@ import lombok.Data;
 @Data
 @ApiModel("教师个人中心出参")
 public class PersonalCenterResp {
+    /*
+    id
+    name
+    avatarId
+    avatar
+    email
+    phone
+    introduce
+    researchDirection
+    List<ClassPO>
+     */
 }

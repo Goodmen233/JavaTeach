@@ -11,5 +11,8 @@ import lombok.Data;
  */
 @Data
 @ApiModel("章节内容删除入参")
-public class ChapterContentDeleteReq extends CommonReq {
+public class ChapterContentDeleteReq {
+    /*
+    id
+     */
 }

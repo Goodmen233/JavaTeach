@@ -11,5 +11,8 @@ import lombok.Data;
  */
 @Data
 @ApiModel("作业/练习解答详情入参")
-public class ExerciseDetailReq extends CommonReq {
+public class ExerciseDetailReq {
+    /*
+    id
+     */
 }

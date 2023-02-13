@@ -32,7 +32,7 @@ public class TeacherUrl  extends CommonUrl {
     public static final String COURSE_DELETE = COURSE + "/delete";
 
     /**
-     * 课程章节树修改
+     * 课程章节树新增/修改
      */
     public static final String CHAPTER_TREE_MODIFY = CHAPTER_TREE + "/modify";
 
@@ -62,12 +62,12 @@ public class TeacherUrl  extends CommonUrl {
     public static final String SCORE_STATICS = PREFIX + "/scoreStatics";
 
     /**
-     * 话题发布/修改
+     * 分享发布/修改
      */
-    public static final String TOPIC_PUBLISH = PREFIX + "/topic/publish";
+    public static final String SHARE_PUBLISH = PREFIX + "/share/publish";
 
     /**
-     * 话题删除
+     * 分享删除
      */
-    public static final String TOPIC_DELETE = PREFIX + "/topic/delete";
+    public static final String SHARE_DELETE = PREFIX + "/share/delete";
 }

@@ -12,4 +12,15 @@ import lombok.Data;
 @Data
 @ApiModel("教师个人中心修改入参")
 public class PersonalCenterModifyReq extends CommonReq {
+
+    /*
+    id
+    name
+    avatarId
+    email
+    phone
+    introduce
+    researchDirection
+    List<ClassPO>
+     */
 }
