@@ -2,7 +2,9 @@ package com.ccb.controller;
 
 import com.ccb.common.urls.CommonUrl;
 import com.ccb.common.urls.UserUrl;
+import com.ccb.domain.common.PageResp;
 import com.ccb.domain.common.ResultInfo;
+import com.ccb.domain.po.CoursePO;
 import com.ccb.domain.vo.req.user.*;
 import com.ccb.domain.vo.resp.CommentResp;
 import com.ccb.domain.vo.resp.user.*;
@@ -62,7 +64,7 @@ public class UserController {
     @ApiOperation("课程列表信息")
     @GetMapping(CommonUrl.COURSE)
     @ResponseBody
-    public ResultInfo<CourseResp> course(CourseReq courseReq) {
+    public ResultInfo<PageResp<CoursePO>> course(CourseReq courseReq) {
         return ResultInfo.success();
     }
 

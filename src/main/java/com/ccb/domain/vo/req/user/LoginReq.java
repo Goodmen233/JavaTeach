@@ -1,5 +1,6 @@
 package com.ccb.domain.vo.req.user;
 
+import com.ccb.common.enums.UserTypeEnum;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -22,6 +23,6 @@ public class LoginReq {
     @ApiModelProperty("密码")
     private String password;
 
-    // TODO @ApiModelProperty("用户类型: ") 枚举
+    @ApiModelProperty("用户类型: " + UserTypeEnum.KEY_VALUE)
     private Integer type;
 }

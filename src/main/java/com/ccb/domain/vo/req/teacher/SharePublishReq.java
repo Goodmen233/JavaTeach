@@ -13,5 +13,6 @@ import lombok.Data;
 public class SharePublishReq {
     /*
     po
+    list<tagId>
      */
 }
