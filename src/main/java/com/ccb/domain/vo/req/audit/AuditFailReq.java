@@ -1,6 +1,7 @@
 package com.ccb.domain.vo.req.audit;
 
 import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 /**
@@ -11,7 +12,7 @@ import lombok.Data;
 @Data
 @ApiModel("审核不通过入参")
 public class AuditFailReq {
-    /*
-    被审核人id
-     */
+
+    @ApiModelProperty("待审核人id")
+    private Long id;
 }

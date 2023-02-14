@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.List;
+
 /**
  * @Description: 审核接口
  * @Author: CCB
@@ -31,7 +33,7 @@ public class AuditController {
     @ApiOperation("待审核列表")
     @GetMapping(AuditUrl.AUDIT)
     @ResponseBody
-    public ResultInfo<AuditResp> audit() {
+    public ResultInfo<List<AuditResp>> audit() {
         return ResultInfo.success();
     }
 

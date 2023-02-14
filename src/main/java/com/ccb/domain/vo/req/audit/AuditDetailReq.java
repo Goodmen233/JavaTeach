@@ -1,7 +1,7 @@
 package com.ccb.domain.vo.req.audit;
 
-import com.ccb.domain.common.CommonReq;
 import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 /**
@@ -12,7 +12,7 @@ import lombok.Data;
 @Data
 @ApiModel("审核详情入参")
 public class AuditDetailReq {
-    /*
-    被审核人id
-     */
+
+    @ApiModelProperty("待审核人id")
+    private Long id;
 }
