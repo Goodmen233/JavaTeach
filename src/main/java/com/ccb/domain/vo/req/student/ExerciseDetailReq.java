@@ -10,7 +10,7 @@ import lombok.Data;
  * @Date: 2023/2/9 17:58
  */
 @Data
-@ApiModel("作业/练习解答详情入参")
+@ApiModel("作业练习解答详情入参")
 public class ExerciseDetailReq {
 
     @ApiModelProperty("作业/练习id")

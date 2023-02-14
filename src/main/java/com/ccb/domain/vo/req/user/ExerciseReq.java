@@ -11,7 +11,7 @@ import lombok.Data;
  * @Date: 2023/2/9 14:59
  */
 @Data
-@ApiModel("作业/练习列表入参")
+@ApiModel("作业练习列表入参")
 public class ExerciseReq extends PageReq {
 
     @ApiModelProperty("课程id")

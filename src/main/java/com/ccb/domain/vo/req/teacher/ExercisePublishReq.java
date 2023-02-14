@@ -13,7 +13,7 @@ import java.util.List;
  * @Date: 2023/2/10 10:41
  */
 @Data
-@ApiModel("作业/练习发布入参")
+@ApiModel("作业练习发布入参")
 public class ExercisePublishReq {
 
     @ApiModelProperty("练习/作业入参")

@@ -73,7 +73,12 @@ public class CommonUrl {
     public static final String FORUM_DELETE = FORUM + "/delete";
 
     /**
-     * 话题模块
+     * 分享模块
      */
-    public static final String TOPIC = PREFIX + "/topic";
+    public static final String SHARE = PREFIX + "/share";
+
+    /**
+     * 用户信息
+     */
+    public static final String USER_INFO = PREFIX + "/userInfo";
 }

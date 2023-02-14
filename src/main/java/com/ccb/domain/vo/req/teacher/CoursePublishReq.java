@@ -12,7 +12,7 @@ import java.util.List;
  * @Date: 2023/2/10 10:34
  */
 @Data
-@ApiModel("课程发布/修改入参")
+@ApiModel("课程发布修改入参")
 public class CoursePublishReq {
 
     @ApiModelProperty("课程id")

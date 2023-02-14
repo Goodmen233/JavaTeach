@@ -96,7 +96,7 @@ public class TeacherController {
         return ResultInfo.success();
     }
 
-    @ApiOperation("话题发布/修改")
+    @ApiOperation("分享发布/修改")
     @PostMapping(TeacherUrl.SHARE_PUBLISH)
     @ResponseBody
     public ResultInfo<Boolean> sharePublish(@RequestBody SharePublishReq sharePublishReq) {

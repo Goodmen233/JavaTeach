@@ -121,7 +121,7 @@ public class UserController {
     }
 
     @ApiOperation("分享页面信息")
-    @PostMapping(CommonUrl.TOPIC)
+    @PostMapping(CommonUrl.SHARE)
     @ResponseBody
     public ResultInfo<PageResp<SharePO>> share(@RequestBody ShareReq shareReq) {
         return ResultInfo.success();
@@ -143,14 +143,14 @@ public class UserController {
     }
 
     @ApiOperation("评论删除")
-    @GetMapping(CommonUrl.COMMENT)
+    @GetMapping(CommonUrl.COMMENT_DELETE)
     @ResponseBody
     public ResultInfo<Boolean> comment(CommentDeleteReq commentDeleteReq) {
         return ResultInfo.success();
     }
 
     @ApiOperation("根据token获取用户信息（包括头像）")
-    @GetMapping(CommonUrl.COMMENT)
+    @GetMapping(CommonUrl.USER_INFO)
     @ResponseBody
     public ResultInfo<UserResp> userInfo(String token) {
         return ResultInfo.success();
