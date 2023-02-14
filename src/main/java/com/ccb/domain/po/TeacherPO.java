@@ -17,6 +17,7 @@ import java.io.Serializable;
 public class TeacherPO implements Serializable {
 
     private static final long serialVersionUID = 2776557383202405382L;
+
     /**
     * 教师id
     */
