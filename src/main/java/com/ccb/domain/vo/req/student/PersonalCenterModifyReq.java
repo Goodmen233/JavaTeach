@@ -1,7 +1,9 @@
 package com.ccb.domain.vo.req.student;
 
 import com.ccb.domain.common.CommonReq;
+import com.ccb.domain.po.ClassPO;
 import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 /**
@@ -12,11 +14,22 @@ import lombok.Data;
 @Data
 @ApiModel("学生个人中心修改")
 public class PersonalCenterModifyReq {
-     /*
-    id
-    name
-    avatarId
-    email
-    phone
-     */
+
+    @ApiModelProperty("学生id")
+    private Long id;
+
+    @ApiModelProperty("姓名")
+    private String name;
+
+    @ApiModelProperty("邮箱")
+    private String email;
+
+    @ApiModelProperty("头像id")
+    private Long avatarId;
+
+    @ApiModelProperty("手机号")
+    private String phone;
+
+    @ApiModelProperty("班级id")
+    private Long classId;
 }

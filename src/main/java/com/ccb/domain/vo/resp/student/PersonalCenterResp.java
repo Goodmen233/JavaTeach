@@ -1,6 +1,8 @@
 package com.ccb.domain.vo.resp.student;
 
+import com.ccb.domain.po.ClassPO;
 import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 /**
@@ -11,13 +13,25 @@ import lombok.Data;
 @Data
 @ApiModel("学生个人中心出参")
 public class PersonalCenterResp {
-    /*
-    id
-    name
-    avatarId
-    avatar
-    email
-    phone
-    ClassPO
-     */
+
+    @ApiModelProperty("学生id")
+    private Long id;
+
+    @ApiModelProperty("姓名")
+    private String name;
+
+    @ApiModelProperty("邮箱")
+    private String email;
+
+    @ApiModelProperty("头像id")
+    private Long avatarId;
+
+    @ApiModelProperty("头像url")
+    private String avatarUrl;
+
+    @ApiModelProperty("手机号")
+    private String phone;
+
+    @ApiModelProperty("班级信息")
+    private ClassPO clazz;
 }
