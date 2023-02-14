@@ -25,6 +25,12 @@ public class ExercisePO implements Serializable {
     private Long id;
 
     /**
+     * 标题
+     */
+    @ApiModelProperty("标题")
+    private String title;
+
+    /**
     * 结束后是否查看答案 0:是, 1:否
     */
     @ApiModelProperty("结束后是否查看答案 0:是, 1:否")

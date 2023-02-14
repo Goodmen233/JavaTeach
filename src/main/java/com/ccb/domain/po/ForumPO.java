@@ -19,9 +19,9 @@ public class ForumPO implements Serializable {
     private static final long serialVersionUID = -1209598272149537591L;
 
     /**
-    * 交流id
+    * 讨论id
     */
-    @ApiModelProperty("交流id")
+    @ApiModelProperty("讨论id")
     private Long id;
 
     /**

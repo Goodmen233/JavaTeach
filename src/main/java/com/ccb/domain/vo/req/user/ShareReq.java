@@ -2,6 +2,7 @@ package com.ccb.domain.vo.req.user;
 
 import com.ccb.domain.common.PageReq;
 import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 /**
@@ -12,7 +13,10 @@ import lombok.Data;
 @Data
 @ApiModel("分享页面入参")
 public class ShareReq extends PageReq {
-    /*
-    课程id
+
+    /**
+     * 关联课程id
      */
+    @ApiModelProperty("关联课程id")
+    private Long courseId;
 }

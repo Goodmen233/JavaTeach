@@ -1,6 +1,7 @@
 package com.ccb.domain.vo.req.user;
 
 import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 /**
@@ -12,7 +13,9 @@ import lombok.Data;
 @ApiModel("评论删除入参")
 public class CommentDeleteReq {
 
-    /*
-    id
+    /**
+     * 评论id
      */
+    @ApiModelProperty("评论id")
+    private Long id;
 }

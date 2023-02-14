@@ -17,7 +17,4 @@ public class ExerciseReq extends PageReq {
     @ApiModelProperty("课程id")
     private Long courseId;
 
-    // TODO 枚举 @ApiModelProperty("类型：")
-    private Integer type;
-
 }

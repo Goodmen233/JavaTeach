@@ -1,7 +1,7 @@
 package com.ccb.domain.vo.req.user;
 
-import com.ccb.domain.common.CommonReq;
 import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 /**
@@ -13,10 +13,15 @@ import lombok.Data;
 @ApiModel("讨论发布入参")
 public class ForumPublishReq {
 
-    /*
-    内容
-    // 用户信息toke取
-    link id
-    link type
+    /**
+     * 内容
      */
+    @ApiModelProperty("内容")
+    private String content;
+
+    /**
+     * 关联课程id
+     */
+    @ApiModelProperty("关联课程id")
+    private Long courseId;
 }

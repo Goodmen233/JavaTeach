@@ -19,9 +19,9 @@ public class SharePO implements Serializable {
     private static final long serialVersionUID = 8624430963158295658L;
 
     /**
-    * 话题id
+    * 分享id
     */
-    @ApiModelProperty("话题id")
+    @ApiModelProperty("分享id")
     private Long id;
 
     /**
