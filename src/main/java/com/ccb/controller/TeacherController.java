@@ -99,14 +99,14 @@ public class TeacherController {
     @ApiOperation("话题发布/修改")
     @PostMapping(TeacherUrl.SHARE_PUBLISH)
     @ResponseBody
-    public ResultInfo<Boolean> sharePublish(@RequestBody SharePublishReq topicPublishReq) {
+    public ResultInfo<Boolean> sharePublish(@RequestBody SharePublishReq sharePublishReq) {
         return ResultInfo.success();
     }
 
     @ApiOperation("分享删除")
     @PostMapping(TeacherUrl.SHARE_DELETE)
     @ResponseBody
-    public ResultInfo<Boolean> shareDelete(@RequestBody SharePublishReq topicDeleteReq) {
+    public ResultInfo<Boolean> shareDelete(@RequestBody ShareDeleteReq shareDeleteReq) {
         return ResultInfo.success();
     }
 

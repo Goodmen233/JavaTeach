@@ -1,7 +1,7 @@
 package com.ccb.domain.vo.req.teacher;
 
-import com.ccb.domain.common.CommonReq;
 import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 /**
@@ -12,4 +12,7 @@ import lombok.Data;
 @Data
 @ApiModel("分享删除入参")
 public class ShareDeleteReq {
+
+    @ApiModelProperty("分享id")
+    private Long id;
 }

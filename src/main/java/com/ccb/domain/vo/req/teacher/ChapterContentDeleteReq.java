@@ -1,7 +1,7 @@
 package com.ccb.domain.vo.req.teacher;
 
-import com.ccb.domain.common.CommonReq;
 import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 /**
@@ -12,7 +12,7 @@ import lombok.Data;
 @Data
 @ApiModel("章节内容删除入参")
 public class ChapterContentDeleteReq {
-    /*
-    id
-     */
+
+    @ApiModelProperty("课程内容id")
+    private Long id;
 }
