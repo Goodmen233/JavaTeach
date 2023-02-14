@@ -1,6 +1,7 @@
 package com.ccb.domain.vo.req.file;
 
 import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 /**
@@ -12,8 +13,7 @@ import lombok.Data;
 @ApiModel("文件删除入参")
 public class DeleteReq {
 
-    /*
-    文件id
-     */
+    @ApiModelProperty("文件id")
+    private Long id;
 
 }

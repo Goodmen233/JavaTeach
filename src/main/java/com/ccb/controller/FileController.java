@@ -1,14 +1,12 @@
 package com.ccb.controller;
 
 import com.ccb.common.urls.FileUrl;
-import com.ccb.common.urls.teacher.AuditUrl;
+import com.ccb.domain.common.PageResp;
 import com.ccb.domain.common.ResultInfo;
-import com.ccb.domain.vo.req.audit.AuditReq;
+import com.ccb.domain.po.FilePO;
 import com.ccb.domain.vo.req.file.DeleteReq;
 import com.ccb.domain.vo.req.file.UploadReq;
 import com.ccb.domain.vo.req.file.ViewReq;
-import com.ccb.domain.vo.resp.audit.AuditResp;
-import com.ccb.domain.vo.resp.file.ViewResp;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
@@ -31,14 +29,14 @@ public class FileController {
     @ApiOperation("文件列表")
     @GetMapping(FileUrl.VIEW)
     @ResponseBody
-    public ResultInfo<ViewResp> view(ViewReq viewReq) {
+    public ResultInfo<PageResp<FilePO>> view(ViewReq viewReq) {
         return ResultInfo.success();
     }
 
     @ApiOperation("文件上传")
     @GetMapping(FileUrl.UPLOAD)
     @ResponseBody
-    public ResultInfo<Boolean> upload(UploadReq uploadReq) {
+    public ResultInfo<FilePO> upload(UploadReq uploadReq) {
         return ResultInfo.success();
     }
 
