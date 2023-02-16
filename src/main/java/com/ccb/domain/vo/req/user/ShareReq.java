@@ -5,6 +5,8 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
+import java.util.List;
+
 /**
  * @Description: 分享页面入参
  * @Author: CCB
@@ -14,9 +16,9 @@ import lombok.Data;
 @ApiModel("分享页面入参")
 public class ShareReq extends PageReq {
 
-    /**
-     * 关联课程id
-     */
     @ApiModelProperty("关联课程id")
     private Long courseId;
+
+    @ApiModelProperty("标签id集合")
+    private List<Long> tagIdList;
 }
