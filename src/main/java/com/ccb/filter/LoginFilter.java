@@ -20,7 +20,7 @@ import java.io.PrintWriter;
  * @Date: 2023/2/10 11:18
  */
 @Slf4j
-@WebFilter(urlPatterns = {"/file/*", "/teacher/*", "/student/*", "/common/*"})
+@WebFilter(urlPatterns = {"/file/*", "/teacher/*", "/student/*", "/common/*", "/audit/*"})
 public class LoginFilter extends HttpFilter {
 
     private static final long serialVersionUID = 6403614881115304399L;
