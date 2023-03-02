@@ -1,6 +1,7 @@
 package com.ccb.domain.vo.req.user;
 
 import com.ccb.common.enums.UserTypeEnum;
+import com.sun.istack.internal.NotNull;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -20,9 +21,11 @@ public class LoginReq {
     @ApiModelProperty("手机号")
     private String phone;
 
+    @NotNull
     @ApiModelProperty("密码")
     private String password;
 
+    @NotNull
     @ApiModelProperty("用户类型: " + UserTypeEnum.KEY_VALUE)
     private Integer type;
 }
