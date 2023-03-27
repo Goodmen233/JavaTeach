@@ -14,6 +14,9 @@ import lombok.Data;
 @ApiModel("注册信息提交入参")
 public class RegisterSubmitReq {
 
+    @ApiModelProperty("注册id")
+    private Long id;
+
     @ApiModelProperty("名称")
     private String name;
 

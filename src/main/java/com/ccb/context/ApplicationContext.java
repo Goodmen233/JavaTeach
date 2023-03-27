@@ -13,11 +13,11 @@ public class ApplicationContext {
 
     private static ThreadLocal<User> userThreadLocal;
 
-    public void setUser(User user) {
+    public static void setUser(User user) {
         userThreadLocal.set(user);
     }
 
-    public User getUser() {
+    public static User getUser() {
         return userThreadLocal.get();
     }
 

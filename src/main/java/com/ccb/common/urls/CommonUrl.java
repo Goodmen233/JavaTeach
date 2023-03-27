@@ -81,4 +81,9 @@ public class CommonUrl {
      * 用户信息
      */
     public static final String USER_INFO = PREFIX + "/userInfo";
+
+    /**
+     * 获取验证码
+     */
+    public static final String CAPTCHA = PREFIX + "/captcha";
 }

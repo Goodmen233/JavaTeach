@@ -75,8 +75,7 @@ public class UserController {
     @PostMapping(UserUrl.REGISTER)
     @ResponseBody
     public ResultInfo<RegisterResp> register(@RequestBody RegisterReq registerReq) {
-
-        return ResultInfo.success();
+        return ResultInfo.success(userService.registerInfo(registerReq));
     }
 
     @MethodLog
@@ -84,8 +83,7 @@ public class UserController {
     @PostMapping(UserUrl.REGISTER_SUBMIT)
     @ResponseBody
     public ResultInfo<Boolean> registerSubmit(@RequestBody RegisterSubmitReq registerSubmitReq) {
-
-        return ResultInfo.success();
+        return ResultInfo.success(userService.registerSubmit(registerSubmitReq));
     }
 
     @MethodLog
@@ -93,7 +91,7 @@ public class UserController {
     @PostMapping(CommonUrl.UPDATE_PASSWORD)
     @ResponseBody
     public ResultInfo<Boolean> updatePassword(@RequestBody UpdatePasswordReq updatePasswordReq) {
-        return ResultInfo.success();
+        return ResultInfo.success(userService.updatePassword(updatePasswordReq));
     }
 
     @MethodLog

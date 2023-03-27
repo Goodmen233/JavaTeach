@@ -9,4 +9,6 @@ public interface RedisConstant {
 
     String TOKEN_KEY = "token_key";
 
+    String CAPTCHA_KEY = "captcha_key:";
+
 }

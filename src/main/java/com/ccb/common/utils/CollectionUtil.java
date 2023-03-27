@@ -14,4 +14,8 @@ public class CollectionUtil {
     public static <T> boolean isSingleElement(Collection<T> collection) {
         return collection != null && collection.size() == 1;
     }
+
+    public static <T> boolean isEmpty(Collection<T> collection) {
+        return cn.hutool.core.collection.CollectionUtil.isEmpty(collection);
+    }
 }

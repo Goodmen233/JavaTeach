@@ -4,9 +4,11 @@ import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.ccb.common.constants.CommonConstant;
 import com.ccb.common.constants.RedisConstant;
+import com.ccb.common.enums.BooleanEnum;
 import com.ccb.common.enums.UserTypeEnum;
 import com.ccb.common.utils.CollectionUtil;
 import com.ccb.common.utils.RedisUtil;
+import com.ccb.context.ApplicationContext;
 import com.ccb.domain.bo.User;
 import com.ccb.domain.po.ClassPO;
 import com.ccb.domain.po.StudentPO;
@@ -21,13 +23,13 @@ import com.ccb.exception.BizException;
 import com.ccb.mapper.ClassMapper;
 import com.ccb.mapper.StudentMapper;
 import com.ccb.mapper.TeacherMapper;
+import com.ccb.service.MailService;
 import com.ccb.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.BeanUtils;
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
-import tk.mybatis.mapper.weekend.Weekend;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
 
@@ -45,6 +47,8 @@ public class UserServiceImpl implements UserService {
     private final StudentMapper studentMapper;
 
     private final ClassMapper classMapper;
+
+    private final MailService mailService;
 
     @Override
     public LoginResp login(LoginReq loginReq) {
@@ -65,6 +69,7 @@ public class UserServiceImpl implements UserService {
                 .withAudience(user.getName())
                 .sign(Algorithm.HMAC256(CommonConstant.ENCRYPT_KEY));
         RedisUtil.cacheValue(token, user, CommonConstant.REDIS_EXPIRED_TIME);
+        ApplicationContext.setUser(user);
         LoginResp loginResp = new LoginResp();
         loginResp.setToken(token);
         return loginResp;
@@ -125,13 +130,87 @@ public class UserServiceImpl implements UserService {
         return user;
     }
 
+    /**
+     * 预检查邮箱/手机号是否唯一
+     * TODO 单独校验手机号/邮箱唯一才是
+     *
+     * @param registerSubmitReq
+     * @return
+     */
+    private Boolean preCheck(RegisterSubmitReq registerSubmitReq) {
+        TeacherPO teacherPO = new TeacherPO();
+        teacherPO.setEmail(registerSubmitReq.getEmail());
+        teacherPO.setPhone(registerSubmitReq.getPhone());
+        List<TeacherPO> teacherPOList = teacherMapper.queryTeacher(teacherPO);
+        if (CollectionUtil.isEmpty(teacherPOList)) {
+            StudentPO studentPO = new StudentPO();
+            studentPO.setEmail(registerSubmitReq.getEmail());
+            studentPO.setPhone(registerSubmitReq.getPhone());
+            List<StudentPO> studentPOS = studentMapper.queryStudent(studentPO);
+            if (CollectionUtil.isEmpty(studentPOS)) {
+                return true;
+            }
+        }
+        throw new BizException("注册的手机号或者邮箱重复！");
+    }
+
     @Override
     public Boolean registerSubmit(RegisterSubmitReq registerSubmitReq) {
-        return null;
+        preCheck(registerSubmitReq);
+        if (Objects.equals(registerSubmitReq.getIsTeacher(), BooleanEnum.YES)) {
+            if (Objects.isNull(registerSubmitReq.getId())) {
+                TeacherPO teacherPO = new TeacherPO();
+                BeanUtils.copyProperties(registerSubmitReq, teacherPO);
+                teacherPO.setId(null);
+                teacherMapper.insert(teacherPO);
+            } else {
+                TeacherPO teacherPO = new TeacherPO();
+                BeanUtils.copyProperties(registerSubmitReq, teacherPO);
+                teacherMapper.updateByPrimaryKey(teacherPO);
+            }
+        } else {
+            if (Objects.isNull(registerSubmitReq.getId())) {
+                StudentPO studentPO = new StudentPO();
+                BeanUtils.copyProperties(registerSubmitReq, studentPO);
+                studentPO.setId(null);
+                studentMapper.insert(studentPO);
+            } else {
+                StudentPO studentPO = new StudentPO();
+                BeanUtils.copyProperties(registerSubmitReq, studentPO);
+                studentMapper.updateByPrimaryKey(studentPO);
+            }
+        }
+        return Boolean.TRUE;
     }
 
     @Override
     public Boolean updatePassword(UpdatePasswordReq updatePasswordReq) {
-        return null;
+        User user = ApplicationContext.getUser();
+        if (Objects.isNull(user)) {
+            throw new BizException("未查询到用户信息");
+        }
+        if (! Objects.equals(user.getEmail(), updatePasswordReq.getEmail())) {
+            throw new BizException("登录用户与传入的邮箱值不同");
+        }
+        String key = RedisConstant.CAPTCHA_KEY + user.getPhone();
+        if (! RedisUtil.containsValueKey(key)) {
+            throw new BizException("验证码已经过期");
+        }
+        String value = (String) RedisUtil.getValue(key);
+        if (! Objects.equals(value, updatePasswordReq.getVerificationCode())) {
+            throw new BizException("验证码错误");
+        }
+        if (Objects.equals(UserTypeEnum.STUDENT.getIndex(), user.getUserType())) {
+            StudentPO studentPO = new StudentPO();
+            studentPO.setId(user.getId());
+            studentPO.setPassword(updatePasswordReq.getNewPwd());
+            studentMapper.updateByPrimaryKey(studentPO);
+        } else {
+            TeacherPO teacherPO = new TeacherPO();
+            teacherPO.setId(user.getId());
+            teacherPO.setPassword(updatePasswordReq.getNewPwd());
+            teacherMapper.updateByPrimaryKey(teacherPO);
+        }
+        return true;
     }
 }
