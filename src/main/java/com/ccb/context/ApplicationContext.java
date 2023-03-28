@@ -3,6 +3,8 @@ package com.ccb.context;
 import com.ccb.domain.bo.User;
 import lombok.Data;
 
+import java.util.Objects;
+
 /**
  * @Description: 应用程序上下文
  * @Author: CCB
@@ -18,7 +20,11 @@ public class ApplicationContext {
     }
 
     public static User getUser() {
-        return userThreadLocal.get();
+        User user = userThreadLocal.get();
+        if (Objects.isNull(user)) {
+            throw new RuntimeException("获取用户信息异常");
+        }
+        return user;
     }
 
 }

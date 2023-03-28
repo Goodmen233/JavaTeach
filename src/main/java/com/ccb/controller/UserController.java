@@ -1,11 +1,17 @@
 package com.ccb.controller;
 
 import com.ccb.common.annotations.MethodLog;
+import com.ccb.common.enums.UserTypeEnum;
 import com.ccb.common.urls.CommonUrl;
 import com.ccb.common.urls.UserUrl;
+import com.ccb.context.ApplicationContext;
+import com.ccb.domain.bo.CourseBO;
 import com.ccb.domain.bo.ExerciseBO;
+import com.ccb.domain.bo.ExerciseQueryBO;
+import com.ccb.domain.bo.User;
 import com.ccb.domain.common.PageResp;
 import com.ccb.domain.common.ResultInfo;
+import com.ccb.domain.po.ChapterContentPO;
 import com.ccb.domain.po.CommentPO;
 import com.ccb.domain.po.CoursePO;
 import com.ccb.domain.po.FilePO;
@@ -33,11 +39,14 @@ import com.ccb.domain.vo.resp.user.ChapterTreeResp;
 import com.ccb.domain.vo.resp.user.LoginResp;
 import com.ccb.domain.vo.resp.user.RegisterResp;
 import com.ccb.exception.BizException;
+import com.ccb.service.ChapterService;
+import com.ccb.service.CourseService;
 import com.ccb.service.UserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -58,6 +67,10 @@ import java.util.Objects;
 public class UserController {
 
     private final UserService userService;
+
+    private final CourseService courseService;
+
+    private final ChapterService chapterService;
 
     @MethodLog
     @ApiOperation("登录")
@@ -99,8 +112,15 @@ public class UserController {
     @GetMapping(CommonUrl.COURSE)
     @ResponseBody
     public ResultInfo<PageResp<CoursePO>> course(CourseReq courseReq) {
-        // 获取token，如果是老师，只展示老师的授课
-        return ResultInfo.success();
+        // 如果是老师，只展示老师的授课
+        // TODO 如果是学生，展示关联班级的老师的授课
+        User user = ApplicationContext.getUser();
+        CourseBO courseBO = new CourseBO();
+        BeanUtils.copyProperties(courseReq, courseBO);
+        if (Objects.equals(UserTypeEnum.TEACHER.getIndex(), user.getUserType())) {
+            courseBO.setTeacherId(user.getId());
+        }
+        return ResultInfo.success(courseService.queryCourse(courseBO));
     }
 
     @MethodLog
@@ -108,7 +128,7 @@ public class UserController {
     @GetMapping(CommonUrl.CHAPTER_TREE)
     @ResponseBody
     public ResultInfo<ChapterTreeResp> chapterTree(ChapterTreeReq chapterTreeReq) {
-        return ResultInfo.success();
+        return ResultInfo.success(chapterService.queryChapterTree(chapterTreeReq.getCourseId()));
     }
 
     @MethodLog
@@ -116,7 +136,10 @@ public class UserController {
     @GetMapping(CommonUrl.CHAPTER_CONTENT)
     @ResponseBody
     public ResultInfo<ChapterContentResp> chapterContent(ChapterContentReq chapterContentReq) {
-        return ResultInfo.success();
+        ChapterContentPO chapterContentPO = chapterService.queryChapterContentByChapterId(chapterContentReq.getChapterContentId());
+        ChapterContentResp chapterContentResp = new ChapterContentResp();
+        BeanUtils.copyProperties(chapterContentPO, chapterContentResp);
+        return ResultInfo.success(chapterContentResp);
     }
 
     @MethodLog
@@ -124,6 +147,9 @@ public class UserController {
     @GetMapping(CommonUrl.EXERCISE)
     @ResponseBody
     public ResultInfo<PageResp<ExerciseBO>> exercise(ExerciseReq exerciseReq) {
+        ExerciseQueryBO exerciseQueryBO = new ExerciseQueryBO();
+        BeanUtils.copyProperties(exerciseReq, exerciseQueryBO);
+
         return ResultInfo.success();
     }
 

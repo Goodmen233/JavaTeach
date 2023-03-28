@@ -17,6 +17,6 @@ import java.util.List;
 public class ChapterTreeResp {
 
     @ApiModelProperty("章节树节点信息列表，按照1 -> 1.1 -> 1.1.1 -> 1.2等顺序返回")
-    private List<ChapterPO> chapterTreeBOList;
+    private List<ChapterPO> chapterTreePOList;
 
 }

@@ -29,7 +29,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
-import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
 
@@ -186,9 +185,6 @@ public class UserServiceImpl implements UserService {
     @Override
     public Boolean updatePassword(UpdatePasswordReq updatePasswordReq) {
         User user = ApplicationContext.getUser();
-        if (Objects.isNull(user)) {
-            throw new BizException("未查询到用户信息");
-        }
         if (! Objects.equals(user.getEmail(), updatePasswordReq.getEmail())) {
             throw new BizException("登录用户与传入的邮箱值不同");
         }

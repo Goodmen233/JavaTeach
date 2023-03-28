@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.ccb.mapper.CourseMapper">
+    <sql id="whereCondition">
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="name != null and name != ''">
+                and name like concat('%', #{name}, '%')
+            </if>
+            <if test="teacherId != null">
+                and teacher_id = #{teacherId}
+            </if>
+        </where>
+    </sql>
+
+    <select id="queryCourse" parameterType="com.ccb.domain.bo.CourseBO" resultType="com.ccb.domain.po.CoursePO">
+        select * from t_course
+        <include refid="whereCondition"/>
+        limit #{pageNo}, #{pageSize}
+    </select>
+
+    <select id="countCourse" parameterType="com.ccb.domain.bo.CourseBO" resultType="java.lang.Long">
+        select count(*) from t_course
+        <include refid="whereCondition"/>
+    </select>
+</mapper>

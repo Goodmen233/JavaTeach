@@ -38,9 +38,6 @@ public class CommonController {
     @ResponseBody
     public ResultInfo<String> captcha() {
         User user = ApplicationContext.getUser();
-        if (Objects.isNull(user)) {
-            throw new BizException("未查询到用户登录信息");
-        }
         String key = RedisConstant.CAPTCHA_KEY + user.getPhone();
         if (RedisUtil.containsValueKey(key)) {
             throw new BizException("获取验证码太过频繁");

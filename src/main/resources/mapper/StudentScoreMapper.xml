@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.ccb.mapper.StudentScoreMapper">
+    <select id="queryStudentScore" parameterType="com.ccb.domain.po.StudentScorePO" resultType="com.ccb.domain.po.StudentScorePO">
+        select * from t_student_score
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="studentId != null">
+                and student_id = #{studentId}
+            </if>
+            <if test="linkId != null">
+                and link_id = #{linkId}
+            </if>
+            <if test="linkType != null">
+                and link_type = #{linkType}
+            </if>
+        </where>
+    </select>
+
+</mapper>

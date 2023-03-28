@@ -17,7 +17,12 @@ public enum ScoreLinkTypeEnum implements IEnum {
     /**
      * 作业成绩
      */
-    EXERCISE(1, "作业")
+    EXERCISE(1, "作业"),
+
+    /**
+     * 选课，暂无成绩
+     */
+    CHOOSE(99, "选课")
 
     ;
 
