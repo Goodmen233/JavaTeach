@@ -44,9 +44,9 @@ public class ExerciseServiceImpl implements ExerciseService {
             ExerciseBO exerciseBO = new ExerciseBO();
             BeanUtils.copyProperties(t, exerciseBO);
             User user = ApplicationContext.getUser();
+            StudentScorePO studentScorePO = new StudentScorePO();
             if (Objects.equals(user.getUserType(), UserTypeEnum.STUDENT.getIndex())) {
                 // 学生-统计完成情况
-                StudentScorePO studentScorePO = new StudentScorePO();
                 studentScorePO.setStudentId(user.getId());
                 studentScorePO.setLinkId(t.getId());
                 List<StudentScorePO> studentScorePOS = studentScoreMapper.queryStudentScore(studentScorePO);
@@ -56,12 +56,11 @@ public class ExerciseServiceImpl implements ExerciseService {
                     exerciseBO.setMark("已完成");
                 }
             } else {
-                // 老师-完成人数/班级人数 TODO student_score表link_type多一个枚举，有选课即生成
-                StudentScorePO studentScorePO = new StudentScorePO();
+                // 老师-完成人数/班级人数 TODO student_score表的sql脚本中的link_type多一个枚举，有选课即生成
                 studentScorePO.setLinkId(t.getId());
                 List<StudentScorePO> studentScorePOS = studentScoreMapper.queryStudentScore(studentScorePO);
                 int total = studentScorePOS.size();
-                studentScorePOS = studentScorePOS.stream().filter(p -> !Objects.equals(p.getLinkType(), ScoreLinkTypeEnum.CHOOSE.getIndex())).collect(Collectors.toList());
+                studentScorePOS = studentScorePOS.stream().filter(p -> Objects.equals(p.getLinkType(), ScoreLinkTypeEnum.EXERCISE.getIndex())).collect(Collectors.toList());
                 int count = studentScorePOS.size();
                 exerciseBO.setMark(count + "/" + total);
             }

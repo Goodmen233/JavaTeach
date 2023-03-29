@@ -8,6 +8,8 @@ import com.ccb.context.ApplicationContext;
 import com.ccb.domain.bo.CourseBO;
 import com.ccb.domain.bo.ExerciseBO;
 import com.ccb.domain.bo.ExerciseQueryBO;
+import com.ccb.domain.bo.FileBO;
+import com.ccb.domain.bo.ForumBO;
 import com.ccb.domain.bo.User;
 import com.ccb.domain.common.PageResp;
 import com.ccb.domain.common.ResultInfo;
@@ -41,6 +43,9 @@ import com.ccb.domain.vo.resp.user.RegisterResp;
 import com.ccb.exception.BizException;
 import com.ccb.service.ChapterService;
 import com.ccb.service.CourseService;
+import com.ccb.service.ExerciseService;
+import com.ccb.service.FileService;
+import com.ccb.service.ForumService;
 import com.ccb.service.UserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -71,6 +76,12 @@ public class UserController {
     private final CourseService courseService;
 
     private final ChapterService chapterService;
+
+    private final ExerciseService exerciseService;
+
+    private final FileService fileService;
+
+    private final ForumService forumService;
 
     @MethodLog
     @ApiOperation("登录")
@@ -149,8 +160,7 @@ public class UserController {
     public ResultInfo<PageResp<ExerciseBO>> exercise(ExerciseReq exerciseReq) {
         ExerciseQueryBO exerciseQueryBO = new ExerciseQueryBO();
         BeanUtils.copyProperties(exerciseReq, exerciseQueryBO);
-
-        return ResultInfo.success();
+        return ResultInfo.success(exerciseService.queryExercise(exerciseQueryBO));
     }
 
     @MethodLog
@@ -158,7 +168,10 @@ public class UserController {
     @GetMapping(CommonUrl.RESOURCE)
     @ResponseBody
     public ResultInfo<PageResp<FilePO>> resource(ResourceReq resourceReq) {
-        return ResultInfo.success();
+        FileBO fileBO = new FileBO();
+        BeanUtils.copyProperties(resourceReq, fileBO);
+        fileBO.setLinkId(resourceReq.getCourseId());
+        return ResultInfo.success(fileService.queryFile(fileBO));
     }
 
     @MethodLog
@@ -166,7 +179,9 @@ public class UserController {
     @GetMapping(CommonUrl.FORUM)
     @ResponseBody
     public ResultInfo<PageResp<ForumPO>> forum(ForumReq forumReq) {
-        return ResultInfo.success();
+        ForumBO forumBO = new ForumBO();
+        BeanUtils.copyProperties(forumReq, forumBO);
+        return ResultInfo.success(forumService.queryForum(forumBO));
     }
 
     @MethodLog
