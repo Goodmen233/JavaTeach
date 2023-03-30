@@ -189,7 +189,10 @@ public class UserController {
     @PostMapping(CommonUrl.FORUM_PUBLISH)
     @ResponseBody
     public ResultInfo<Boolean> forumPublish(@RequestBody ForumPublishReq forumPublishReq) {
-        return ResultInfo.success();
+        ForumPO forumPO = new ForumPO();
+        BeanUtils.copyProperties(forumPublishReq, forumPO);
+        forumService.insertForum(forumPO);
+        return ResultInfo.success(Boolean.TRUE);
     }
 
     @MethodLog
@@ -197,7 +200,8 @@ public class UserController {
     @PostMapping(CommonUrl.FORUM_DELETE)
     @ResponseBody
     public ResultInfo<Boolean> forumDelete(@RequestBody ForumDeleteReq forumDeleteReq) {
-        return ResultInfo.success();
+        forumService.deleteFormById(forumDeleteReq.getId());
+        return ResultInfo.success(Boolean.TRUE);
     }
 
     @MethodLog

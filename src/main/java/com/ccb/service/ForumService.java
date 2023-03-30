@@ -18,4 +18,18 @@ public interface ForumService {
      * @return
      */
     PageResp<ForumPO> queryForum(ForumBO forumBO);
+
+    /**
+     * 新增讨论
+     *
+     * @param forumPO
+     */
+    void insertForum(ForumPO forumPO);
+
+    /**
+     * 删除讨论
+     *
+     * @param id
+     */
+    void deleteFormById(Long id);
 }

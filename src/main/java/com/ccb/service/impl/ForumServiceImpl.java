@@ -26,4 +26,14 @@ public class ForumServiceImpl implements ForumService {
         page.setRows(forumMapper.queryForum(forumBO));
         return page;
     }
+
+    @Override
+    public void insertForum(ForumPO forumPO) {
+        forumMapper.insertSelective(forumPO);
+    }
+
+    @Override
+    public void deleteFormById(Long id) {
+        forumMapper.deleteByPrimaryKey(id);
+    }
 }
