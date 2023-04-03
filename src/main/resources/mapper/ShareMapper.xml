@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.ccb.mapper.ShareMapper">
+    <sql id="whereCondition">
+        <where>
+            <if test="id != null">
+                and s.id = #{id}
+            </if>
+            <if test="courseId != null">
+                and s.course_id = #{courseId}
+            </if>
+            <if test="tagIdList.size() != null and tagIdList.size() != 0">
+                and tl.tag_id in
+                <foreach collection="tagIdList" open="(" close=")" separator="," item="item">
+                    #{item}
+                </foreach>
+            </if>
+        </where>
+    </sql>
+    <select id="queryShare" parameterType="com.ccb.domain.bo.ShareBO" resultType="com.ccb.domain.po.SharePO">
+        select * from t_share s
+        left join t_tag_link tl
+        on tl.link_id = s.id
+        <include refid="whereCondition"/>
+        limit #{pageNo}, #{pageSize}
+    </select>
+
+    <select id="countShare"  parameterType="com.ccb.domain.bo.ShareBO" resultType="java.lang.Long">
+        select count(*) from t_share s
+        left join t_tag_link tl
+        on tl.link_id = s.id
+        <include refid="whereCondition"/>
+    </select>
+
+</mapper>

@@ -27,4 +27,8 @@ public class ApplicationContext {
         return user;
     }
 
+    public static void removeUser() {
+        userThreadLocal.remove();
+    }
+
 }

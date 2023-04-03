@@ -4,12 +4,15 @@ import com.ccb.common.annotations.MethodLog;
 import com.ccb.common.enums.UserTypeEnum;
 import com.ccb.common.urls.CommonUrl;
 import com.ccb.common.urls.UserUrl;
+import com.ccb.common.utils.RedisUtil;
 import com.ccb.context.ApplicationContext;
+import com.ccb.domain.bo.CommentBO;
 import com.ccb.domain.bo.CourseBO;
 import com.ccb.domain.bo.ExerciseBO;
 import com.ccb.domain.bo.ExerciseQueryBO;
 import com.ccb.domain.bo.FileBO;
 import com.ccb.domain.bo.ForumBO;
+import com.ccb.domain.bo.ShareBO;
 import com.ccb.domain.bo.User;
 import com.ccb.domain.common.PageResp;
 import com.ccb.domain.common.ResultInfo;
@@ -42,10 +45,12 @@ import com.ccb.domain.vo.resp.user.LoginResp;
 import com.ccb.domain.vo.resp.user.RegisterResp;
 import com.ccb.exception.BizException;
 import com.ccb.service.ChapterService;
+import com.ccb.service.CommentService;
 import com.ccb.service.CourseService;
 import com.ccb.service.ExerciseService;
 import com.ccb.service.FileService;
 import com.ccb.service.ForumService;
+import com.ccb.service.ShareService;
 import com.ccb.service.UserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -58,6 +63,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.io.Serializable;
 import java.util.Objects;
 
 /**
@@ -82,6 +88,10 @@ public class UserController {
     private final FileService fileService;
 
     private final ForumService forumService;
+
+    private final ShareService shareService;
+
+    private final CommentService commentService;
 
     @MethodLog
     @ApiOperation("登录")
@@ -209,7 +219,10 @@ public class UserController {
     @PostMapping(CommonUrl.SHARE)
     @ResponseBody
     public ResultInfo<PageResp<SharePO>> share(@RequestBody ShareReq shareReq) {
-        return ResultInfo.success();
+        ShareBO shareBO = new ShareBO();
+        // TODO List没有拷贝？
+        BeanUtils.copyProperties(shareReq, shareBO);
+        return ResultInfo.success(shareService.queryShare(shareBO));
     }
 
     @MethodLog
@@ -217,7 +230,9 @@ public class UserController {
     @GetMapping(CommonUrl.COMMENT)
     @ResponseBody
     public ResultInfo<PageResp<CommentPO>> comment(CommentReq commentReq) {
-        return ResultInfo.success();
+        CommentBO commentBO = new CommentBO();
+        BeanUtils.copyProperties(commentReq, commentBO);
+        return ResultInfo.success(commentService.queryComment(commentBO));
     }
 
     @MethodLog
@@ -226,7 +241,14 @@ public class UserController {
     @ResponseBody
     public ResultInfo<Boolean> commentPublish(CommentPublishReq commentPublishReq) {
         // 获取用户信息进行处理
-        return ResultInfo.success();
+        User user = ApplicationContext.getUser();
+        CommentPO commentPO = new CommentPO();
+        BeanUtils.copyProperties(commentPublishReq, commentPO);
+        commentPO.setUserId(user.getId());
+        commentPO.setUserName(user.getName());
+        commentPO.setUserAvatar(user.getAvatarUrl());
+        commentService.insertComment(commentPO);
+        return ResultInfo.success(Boolean.TRUE);
     }
 
     @MethodLog
@@ -234,7 +256,8 @@ public class UserController {
     @GetMapping(CommonUrl.COMMENT_DELETE)
     @ResponseBody
     public ResultInfo<Boolean> comment(CommentDeleteReq commentDeleteReq) {
-        return ResultInfo.success();
+        commentService.deleteCommentById(commentDeleteReq.getId());
+        return ResultInfo.success(Boolean.TRUE);
     }
 
     @MethodLog
@@ -242,6 +265,15 @@ public class UserController {
     @GetMapping(CommonUrl.USER_INFO)
     @ResponseBody
     public ResultInfo<UserResp> userInfo(String token) {
-        return ResultInfo.success();
+        User user = (User) RedisUtil.getValue(token);
+        if (Objects.isNull(user)) {
+            throw new BizException("登录过期");
+        }
+        if (!Objects.equals(user, ApplicationContext.getUser())) {
+            throw new BizException("登录用户不一致");
+        }
+        UserResp userResp = new UserResp();
+        BeanUtils.copyProperties(user, userResp);
+        return ResultInfo.success(userResp);
     }
 }
