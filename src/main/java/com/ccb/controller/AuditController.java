@@ -83,7 +83,7 @@ public class AuditController {
     @GetMapping(AuditUrl.FAIL)
     @ResponseBody
     public ResultInfo<Boolean> auditFail(AuditFailReq auditFailReq) {
-        auditService.audit(auditPassReq.getId(), AuditEnum.AUDIT_FAIL.getIndex());
+        auditService.audit(auditFailReq.getId(), AuditEnum.AUDIT_FAIL.getIndex());
         return ResultInfo.success(Boolean.TRUE);
     }
 
