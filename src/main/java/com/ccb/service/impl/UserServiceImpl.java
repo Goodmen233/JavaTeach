@@ -209,4 +209,27 @@ public class UserServiceImpl implements UserService {
         }
         return true;
     }
+
+    @Override
+    public User queryUserById(Long id) {
+        User user = new User();
+        TeacherPO teacherPO = new TeacherPO();
+        teacherPO.setId(id);
+        List<TeacherPO> teacherPOList = teacherMapper.queryTeacher(teacherPO);
+        if (CollectionUtil.isSingleElement(teacherPOList)) {
+            BeanUtils.copyProperties(teacherPOList.get(0), user);
+            user.setUserType(UserTypeEnum.TEACHER.getIndex());
+        } else {
+            StudentPO studentPO = new StudentPO();
+            studentPO.setId(id);
+            List<StudentPO> studentPOList = studentMapper.queryStudent(studentPO);
+            if (CollectionUtil.isSingleElement(studentPOList)) {
+                BeanUtils.copyProperties(studentPOList.get(0), user);
+                user.setUserType(UserTypeEnum.STUDENT.getIndex());
+            } else {
+                throw new BizException("查询用户信息异常");
+            }
+        }
+        return user;
+    }
 }

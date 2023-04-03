@@ -30,6 +30,7 @@ public class FileController {
     @GetMapping(FileUrl.VIEW)
     @ResponseBody
     public ResultInfo<PageResp<FilePO>> view(ViewReq viewReq) {
+        // TODO 课程资料已经有，不用写？
         return ResultInfo.success();
     }
 

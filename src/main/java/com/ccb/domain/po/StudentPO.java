@@ -14,7 +14,7 @@ import java.io.Serializable;
  */
 @Data
 @ApiModel("学生信息")
-public class StudentPO implements Serializable {
+public class StudentPO extends UserPO implements Serializable {
 
     private static final long serialVersionUID = -2882016843530189777L;
 
@@ -59,5 +59,11 @@ public class StudentPO implements Serializable {
     */
     @ApiModelProperty("审核标记: " + AuditEnum.KEY_VALUE)
     private Integer audit;
+
+    /**
+     * 审核人手机号
+     */
+    @ApiModelProperty("审核人手机号")
+    private String auditPhone;
 
 }

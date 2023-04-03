@@ -17,6 +17,9 @@
             <if test="password != null and password != ''">
                 and password = #{password}
             </if>
+            <if test="auditPhone != null and auditPhone != ''">
+                and audit_phone = #{auditPhone}
+            </if>
         </where>
     </select>
 

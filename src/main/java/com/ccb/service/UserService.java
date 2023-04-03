@@ -1,5 +1,6 @@
 package com.ccb.service;
 
+import com.ccb.domain.bo.User;
 import com.ccb.domain.vo.req.user.LoginReq;
 import com.ccb.domain.vo.req.user.RegisterReq;
 import com.ccb.domain.vo.req.user.RegisterSubmitReq;
@@ -40,8 +41,17 @@ public interface UserService {
 
     /**
      * 修改密码
+     *
      * @param updatePasswordReq 修改密码凭证
      * @return 修改成功返回true，反之返回false
      */
     Boolean updatePassword(UpdatePasswordReq updatePasswordReq);
+
+    /**
+     * 通过id查询用户
+     *
+     * @param id
+     * @return
+     */
+    User queryUserById(Long id);
 }
