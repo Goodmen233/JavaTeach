@@ -16,6 +16,7 @@ import java.io.Serializable;
 public class StudentProblemPO implements Serializable {
 
     private static final long serialVersionUID = -7319467556133384281L;
+
     /**
     * 学生答题id
     */

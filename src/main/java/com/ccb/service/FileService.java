@@ -19,4 +19,12 @@ public interface FileService {
      */
     PageResp<FilePO> queryFile(FileBO fileBO);
 
+    /**
+     * 查询用户头像
+     *
+     * @param userId
+     * @return
+     */
+    FilePO queryAvatar(Long userId);
+
 }

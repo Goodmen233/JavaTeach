@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.ccb.mapper.ProblemMapper">
+    <sql id="whereCondition">
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="studentId != null">
+                and student_id = #{studentId}
+            </if>
+            <if test="exerciseId != null">
+                and exerciseId = #{exerciseId}
+            </if>
+        </where>
+    </sql>
+
+    <select id="queryProblem" parameterType="com.ccb.domain.po.ProblemPO" resultType="com.ccb.domain.po.ProblemPO">
+        select * from t_problem
+        <include refid="whereCondition"/>
+    </select>
+
+</mapper>

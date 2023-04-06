@@ -1,10 +1,12 @@
 package com.ccb.service;
 
 import com.ccb.domain.bo.User;
+import com.ccb.domain.po.StudentPO;
 import com.ccb.domain.vo.req.user.LoginReq;
 import com.ccb.domain.vo.req.user.RegisterReq;
 import com.ccb.domain.vo.req.user.RegisterSubmitReq;
 import com.ccb.domain.vo.req.user.UpdatePasswordReq;
+import com.ccb.domain.vo.resp.student.PersonalCenterResp;
 import com.ccb.domain.vo.resp.user.LoginResp;
 import com.ccb.domain.vo.resp.user.RegisterResp;
 
@@ -54,4 +56,19 @@ public interface UserService {
      * @return
      */
     User queryUserById(Long id);
+
+    /**
+     * 通过id查询学生信息
+     *
+     * @param id
+     * @return
+     */
+    PersonalCenterResp queryStudentDetailById(Long id);
+
+    /**
+     * 更新学生信息
+     *
+     * @param studentPO
+     */
+    void updateStudentById(StudentPO studentPO);
 }

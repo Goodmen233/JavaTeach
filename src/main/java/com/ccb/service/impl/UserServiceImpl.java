@@ -11,18 +11,21 @@ import com.ccb.common.utils.RedisUtil;
 import com.ccb.context.ApplicationContext;
 import com.ccb.domain.bo.User;
 import com.ccb.domain.po.ClassPO;
+import com.ccb.domain.po.FilePO;
 import com.ccb.domain.po.StudentPO;
 import com.ccb.domain.po.TeacherPO;
 import com.ccb.domain.vo.req.user.LoginReq;
 import com.ccb.domain.vo.req.user.RegisterReq;
 import com.ccb.domain.vo.req.user.RegisterSubmitReq;
 import com.ccb.domain.vo.req.user.UpdatePasswordReq;
+import com.ccb.domain.vo.resp.student.PersonalCenterResp;
 import com.ccb.domain.vo.resp.user.LoginResp;
 import com.ccb.domain.vo.resp.user.RegisterResp;
 import com.ccb.exception.BizException;
 import com.ccb.mapper.ClassMapper;
 import com.ccb.mapper.StudentMapper;
 import com.ccb.mapper.TeacherMapper;
+import com.ccb.service.FileService;
 import com.ccb.service.MailService;
 import com.ccb.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -46,6 +49,8 @@ public class UserServiceImpl implements UserService {
     private final StudentMapper studentMapper;
 
     private final ClassMapper classMapper;
+
+    private final FileService fileService;
 
     private final MailService mailService;
 
@@ -106,6 +111,9 @@ public class UserServiceImpl implements UserService {
         List<StudentPO> studentPOList = studentMapper.queryStudent(studentPO);
         if (CollectionUtil.isSingleElement(studentPOList)) {
             BeanUtils.copyProperties(studentPOList.get(0), user);
+            FilePO filePO = fileService.queryAvatar(user.getId());
+            user.setAvatarUrl(filePO.getUrl());
+            user.setAvatarId(filePO.getId());
         } else {
             throw new BizException("查询用户信息异常");
         }
@@ -123,6 +131,9 @@ public class UserServiceImpl implements UserService {
         List<TeacherPO> teacherPOList = teacherMapper.queryTeacher(teacherPO);
         if (CollectionUtil.isSingleElement(teacherPOList)) {
             BeanUtils.copyProperties(teacherPOList.get(0), user);
+            FilePO filePO = fileService.queryAvatar(user.getId());
+            user.setAvatarUrl(filePO.getUrl());
+            user.setAvatarId(filePO.getId());
         } else {
             throw new BizException("查询用户信息异常");
         }
@@ -231,5 +242,23 @@ public class UserServiceImpl implements UserService {
             }
         }
         return user;
+    }
+
+    @Override
+    public PersonalCenterResp queryStudentDetailById(Long id) {
+        StudentPO studentPO = new StudentPO();
+        studentPO.setId(id);
+        User user = getUser(studentPO);
+        // 查询班级
+        ClassPO classPO = classMapper.selectByPrimaryKey(user.getClassId());
+        PersonalCenterResp personalCenterResp = new PersonalCenterResp();
+        BeanUtils.copyProperties(user, personalCenterResp);
+        personalCenterResp.setClazz(classPO);
+        return personalCenterResp;
+    }
+
+    @Override
+    public void updateStudentById(StudentPO studentPO) {
+        studentMapper.updateByPrimaryKey(studentPO);
     }
 }

@@ -1,5 +1,6 @@
 package com.ccb.domain.bo;
 
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -35,6 +36,11 @@ public class User implements Serializable {
     private String phone;
 
     /**
+     * 头像id
+     */
+    private Long avatarId;
+
+    /**
      * 头像链接
      */
     private String avatarUrl;
@@ -43,4 +49,9 @@ public class User implements Serializable {
      * 用户类型
      */
     private Integer userType;
+
+    /**
+     * 班级id
+     */
+    private Long classId;
 }
