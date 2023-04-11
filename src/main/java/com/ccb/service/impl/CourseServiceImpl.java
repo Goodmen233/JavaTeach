@@ -28,4 +28,9 @@ public class CourseServiceImpl implements CourseService {
         page.setTotal(courseMapper.countCourse(courseBO));
         return page;
     }
+
+    @Override
+    public void deleteCourseById(Long id) {
+        courseMapper.deleteByPrimaryKey(id);
+    }
 }

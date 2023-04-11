@@ -7,6 +7,7 @@ import com.ccb.domain.common.ResultInfo;
 import com.ccb.domain.vo.req.teacher.*;
 import com.ccb.domain.vo.resp.teacher.PersonalCenterResp;
 import com.ccb.domain.vo.resp.teacher.ScoreStaticsResp;
+import com.ccb.service.CourseService;
 import com.ccb.service.UserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -30,6 +31,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class TeacherController {
 
     private final UserService userService;
+
+    private final CourseService courseService;
 
     @ApiOperation("教师个人中心详情")
     @GetMapping(TeacherUrl.PERSONAL_CENTER)
@@ -59,7 +62,8 @@ public class TeacherController {
     @PostMapping(TeacherUrl.COURSE_DELETE)
     @ResponseBody
     public ResultInfo<Boolean> courseDelete(@RequestBody CourseDeleteReq courseDeleteReq) {
-        return ResultInfo.success();
+        courseService.deleteCourseById(courseDeleteReq.getId());
+        return ResultInfo.success(Boolean.TRUE);
     }
 
     @ApiOperation("课程章节树新增/修改")

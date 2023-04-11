@@ -19,4 +19,11 @@ public interface CourseService {
      */
     PageResp<CoursePO> queryCourse(CourseBO courseBO);
 
+    /**
+     * 删除课程信息
+     *
+     * @param id
+     */
+    void deleteCourseById(Long id);
+
 }
