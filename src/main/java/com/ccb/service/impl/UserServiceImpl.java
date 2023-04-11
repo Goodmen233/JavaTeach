@@ -14,6 +14,7 @@ import com.ccb.domain.po.ClassPO;
 import com.ccb.domain.po.FilePO;
 import com.ccb.domain.po.StudentPO;
 import com.ccb.domain.po.TeacherPO;
+import com.ccb.domain.vo.req.teacher.PersonalCenterModifyReq;
 import com.ccb.domain.vo.req.user.LoginReq;
 import com.ccb.domain.vo.req.user.RegisterReq;
 import com.ccb.domain.vo.req.user.RegisterSubmitReq;
@@ -30,7 +31,10 @@ import com.ccb.service.MailService;
 import com.ccb.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.BeanUtils;
+import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import tk.mybatis.mapper.entity.Example;
 
 import java.util.List;
 import java.util.Objects;
@@ -255,6 +259,38 @@ public class UserServiceImpl implements UserService {
         BeanUtils.copyProperties(user, personalCenterResp);
         personalCenterResp.setClazz(classPO);
         return personalCenterResp;
+    }
+
+    @Override
+    public com.ccb.domain.vo.resp.teacher.PersonalCenterResp queryTeacherDetailById(Long id) {
+        TeacherPO teacherPO = new TeacherPO();
+        teacherPO.setId(id);
+        User user = getUser(teacherPO);
+        // 查询管理的班级
+        Example example = new Example(ClassPO.class);
+        example.clear();
+        example.createCriteria()
+                .andEqualTo("teacher_id", id);
+        List<ClassPO> classPOS = classMapper.selectByExample(example);
+        com.ccb.domain.vo.resp.teacher.PersonalCenterResp personalCenterResp = new com.ccb.domain.vo.resp.teacher.PersonalCenterResp();
+        BeanUtils.copyProperties(user, personalCenterResp);
+        personalCenterResp.setClassList(classPOS);
+        return personalCenterResp;
+    }
+
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public void updateTeacherById(PersonalCenterModifyReq personalCenterModifyReq) {
+        TeacherPO teacherPO = new TeacherPO();
+        BeanUtils.copyProperties(personalCenterModifyReq, teacherPO);
+        teacherMapper.updateByPrimaryKey(teacherPO);
+        Example example = new Example(ClassPO.class);
+        example.clear();
+        example.createCriteria()
+                .andIn("id", personalCenterModifyReq.getClassIdList());
+        ClassPO classPO = new ClassPO();
+        classPO.setTeacherId(personalCenterModifyReq.getId());
+        classMapper.updateByExample(classPO, example);
     }
 
     @Override

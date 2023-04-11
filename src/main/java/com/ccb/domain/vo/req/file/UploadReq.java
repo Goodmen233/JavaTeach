@@ -4,7 +4,6 @@ import com.ccb.common.enums.FileLinkTypeEnum;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
-import org.springframework.web.multipart.MultipartFile;
 
 /**
  * @Description: 文件上传入参
@@ -17,9 +16,6 @@ public class UploadReq {
 
     @ApiModelProperty("文件id")
     private Long id;
-
-    @ApiModelProperty("文件")
-    private MultipartFile file;
 
     @ApiModelProperty("关联id")
     private Long linkId;

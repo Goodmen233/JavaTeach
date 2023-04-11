@@ -34,3 +34,11 @@ spring:
 
 mybatis:
   mapper-locations: mapper/*Mapper.xml
+
+#操作oss需要的一些参数
+aliyun:
+  accessKeyId: LTAI5t8bgbDBDVVjkSFgm6mZ       # 阿里云的accessKeyId
+  secretAccessKey: JNvEyeJhre5qUmPzMj6nrTweySBn9B   # accessKey 密码
+  oss:
+    endPoint: oss-cn-beijing.aliyuncs.com     # Endpoint:在阿里云oss控制台查看自己使用的endpoint
+    bucketName: java-teach   # bucket 名称

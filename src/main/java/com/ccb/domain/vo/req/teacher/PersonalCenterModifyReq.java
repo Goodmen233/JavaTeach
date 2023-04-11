@@ -42,5 +42,5 @@ public class PersonalCenterModifyReq extends CommonReq {
     private String researchDirections;
 
     @ApiModelProperty("管理的班级集合")
-    private List<ClassPO> classList;
+    private List<Long> classIdList;
 }

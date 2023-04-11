@@ -1,10 +1,13 @@
 package com.ccb.controller;
 
 import com.ccb.common.urls.teacher.TeacherUrl;
+import com.ccb.context.ApplicationContext;
+import com.ccb.domain.bo.User;
 import com.ccb.domain.common.ResultInfo;
 import com.ccb.domain.vo.req.teacher.*;
 import com.ccb.domain.vo.resp.teacher.PersonalCenterResp;
 import com.ccb.domain.vo.resp.teacher.ScoreStaticsResp;
+import com.ccb.service.UserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
@@ -26,18 +29,22 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Api(tags = "教师相关接口")
 public class TeacherController {
 
+    private final UserService userService;
+
     @ApiOperation("教师个人中心详情")
     @GetMapping(TeacherUrl.PERSONAL_CENTER)
     @ResponseBody
     public ResultInfo<PersonalCenterResp> personalCenter() {
-        return ResultInfo.success();
+        User user = ApplicationContext.getUser();
+        return ResultInfo.success(userService.queryTeacherDetailById(user.getId()));
     }
 
     @ApiOperation("教师个人中心详情修改")
     @PostMapping(TeacherUrl.PERSONAL_CENTER_MODIFY)
     @ResponseBody
     public ResultInfo<Boolean> personalCenterModify(@RequestBody PersonalCenterModifyReq personalCenterModifyReq) {
-        return ResultInfo.success();
+        userService.updateTeacherById(personalCenterModifyReq);
+        return ResultInfo.success(Boolean.TRUE);
     }
 
     @ApiOperation("课程发布/修改")
