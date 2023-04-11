@@ -2,7 +2,7 @@ package com.ccb.service;
 
 import com.ccb.domain.bo.User;
 import com.ccb.domain.po.StudentPO;
-import com.ccb.domain.po.TeacherPO;
+import com.ccb.domain.vo.req.teacher.CoursePublishReq;
 import com.ccb.domain.vo.req.teacher.PersonalCenterModifyReq;
 import com.ccb.domain.vo.req.user.LoginReq;
 import com.ccb.domain.vo.req.user.RegisterReq;
@@ -88,4 +88,11 @@ public interface UserService {
      * @param studentPO
      */
     void updateStudentById(StudentPO studentPO);
+
+    /**
+     * 新增或者修改课程信息
+     *
+     * @param coursePublishReq
+     */
+    void publishCourse(CoursePublishReq coursePublishReq);
 }

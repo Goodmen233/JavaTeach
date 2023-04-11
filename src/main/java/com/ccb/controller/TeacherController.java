@@ -51,7 +51,8 @@ public class TeacherController {
     @PostMapping(TeacherUrl.COURSE_PUBLISH)
     @ResponseBody
     public ResultInfo<Boolean> coursePublish(@RequestBody CoursePublishReq coursePublishReq) {
-        return ResultInfo.success();
+        userService.publishCourse(coursePublishReq);
+        return ResultInfo.success(Boolean.TRUE);
     }
 
     @ApiOperation("课程删除")

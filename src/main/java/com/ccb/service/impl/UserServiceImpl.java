@@ -11,9 +11,11 @@ import com.ccb.common.utils.RedisUtil;
 import com.ccb.context.ApplicationContext;
 import com.ccb.domain.bo.User;
 import com.ccb.domain.po.ClassPO;
+import com.ccb.domain.po.CoursePO;
 import com.ccb.domain.po.FilePO;
 import com.ccb.domain.po.StudentPO;
 import com.ccb.domain.po.TeacherPO;
+import com.ccb.domain.vo.req.teacher.CoursePublishReq;
 import com.ccb.domain.vo.req.teacher.PersonalCenterModifyReq;
 import com.ccb.domain.vo.req.user.LoginReq;
 import com.ccb.domain.vo.req.user.RegisterReq;
@@ -24,6 +26,7 @@ import com.ccb.domain.vo.resp.user.LoginResp;
 import com.ccb.domain.vo.resp.user.RegisterResp;
 import com.ccb.exception.BizException;
 import com.ccb.mapper.ClassMapper;
+import com.ccb.mapper.CourseMapper;
 import com.ccb.mapper.StudentMapper;
 import com.ccb.mapper.TeacherMapper;
 import com.ccb.service.FileService;
@@ -31,7 +34,6 @@ import com.ccb.service.MailService;
 import com.ccb.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.BeanUtils;
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import tk.mybatis.mapper.entity.Example;
@@ -57,6 +59,8 @@ public class UserServiceImpl implements UserService {
     private final FileService fileService;
 
     private final MailService mailService;
+
+    private final CourseMapper courseMapper;
 
     @Override
     public LoginResp login(LoginReq loginReq) {
@@ -296,5 +300,20 @@ public class UserServiceImpl implements UserService {
     @Override
     public void updateStudentById(StudentPO studentPO) {
         studentMapper.updateByPrimaryKey(studentPO);
+    }
+
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public void publishCourse(CoursePublishReq coursePublishReq) {
+        CoursePO coursePO = new CoursePO();
+        BeanUtils.copyProperties(coursePublishReq, coursePO);
+        if (Objects.isNull(coursePublishReq.getId())) {
+            // 新增
+            courseMapper.insert(coursePO);
+        } else {
+            // 修改
+            courseMapper.updateByPrimaryKey(coursePO);
+        }
+        fileService.saveFile(coursePublishReq.getFileList(), coursePO.getId());
     }
 }

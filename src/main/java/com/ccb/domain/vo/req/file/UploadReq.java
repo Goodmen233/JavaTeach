@@ -17,6 +17,9 @@ public class UploadReq {
     @ApiModelProperty("文件id")
     private Long id;
 
+    @ApiModelProperty("文件url")
+    private String url;
+
     @ApiModelProperty("关联id")
     private Long linkId;
 

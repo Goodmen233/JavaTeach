@@ -4,6 +4,8 @@ import com.ccb.domain.bo.FileBO;
 import com.ccb.domain.common.PageResp;
 import com.ccb.domain.po.FilePO;
 
+import java.util.List;
+
 /**
  * @Description: 文件服务
  * @Author: CCB
@@ -26,5 +28,28 @@ public interface FileService {
      * @return
      */
     FilePO queryAvatar(Long userId);
+
+    /**
+     * 保存文件信息
+     *
+     * @param filePO
+     * @return
+     */
+    Long saveFile(FilePO filePO);
+
+    /**
+     * 通过主键删除id
+     *
+     * @param id
+     */
+    void deleteFileById(Long id);
+
+    /**
+     * 保存文件集合
+     *
+     * @param fileList
+     * @param linkId
+     */
+    void saveFile(List<FilePO> fileList, Long linkId);
 
 }

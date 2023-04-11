@@ -10,8 +10,12 @@ import com.ccb.mapper.FileMapper;
 import com.ccb.service.FileService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import tk.mybatis.mapper.entity.Example;
 
 import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
 /**
  * @Description: 文件服务实现
@@ -43,5 +47,36 @@ public class FileServiceImpl implements FileService {
         } else {
             throw new BizException("查询用户头像异常");
         }
+    }
+
+    @Override
+    public Long saveFile(FilePO filePO) {
+        if (Objects.isNull(filePO.getId())) {
+            fileMapper.insertSelective(filePO);
+        } else {
+            fileMapper.updateByPrimaryKey(filePO);
+        }
+        return filePO.getId();
+    }
+
+    @Override
+    public void deleteFileById(Long id) {
+        fileMapper.deleteByPrimaryKey(id);
+    }
+
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public void saveFile(List<FilePO> fileList, Long linkId) {
+        List<Integer> linkTypeList = fileList.stream().map(FilePO::getLinkType).distinct().collect(Collectors.toList());
+        Example example = new Example(FilePO.class);
+        example.clear();
+        example.createCriteria()
+                .andEqualTo("link_id", linkId)
+                .andIn("link_type", linkTypeList);
+        fileMapper.deleteByExample(example);
+        fileList.forEach(t -> {
+            t.setLinkId(linkId);
+        });
+        fileMapper.insertList(fileList);
     }
 }
