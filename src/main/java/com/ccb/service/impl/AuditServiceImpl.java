@@ -1,15 +1,21 @@
 package com.ccb.service.impl;
 
-import com.ccb.common.enums.AuditEnum;
+import com.ccb.common.enums.ScoreLinkTypeEnum;
 import com.ccb.common.enums.UserTypeEnum;
+import com.ccb.common.utils.CollectionUtil;
 import com.ccb.domain.bo.AuditBO;
 import com.ccb.domain.bo.User;
 import com.ccb.domain.common.PageResp;
+import com.ccb.domain.po.ClassPO;
 import com.ccb.domain.po.StudentPO;
+import com.ccb.domain.po.StudentScorePO;
 import com.ccb.domain.po.TeacherPO;
 import com.ccb.domain.po.UserPO;
 import com.ccb.domain.vo.resp.audit.AuditDetailResp;
+import com.ccb.mapper.ClassMapper;
+import com.ccb.mapper.CourseMapper;
 import com.ccb.mapper.StudentMapper;
+import com.ccb.mapper.StudentScoreMapper;
 import com.ccb.mapper.TeacherMapper;
 import com.ccb.service.AuditService;
 import com.ccb.service.UserService;
@@ -33,6 +39,12 @@ public class AuditServiceImpl implements AuditService {
     private final StudentMapper studentMapper;
 
     private final TeacherMapper teacherMapper;
+
+    private final CourseMapper courseMapper;
+
+    private final ClassMapper classMapper;
+
+    private final StudentScoreMapper studentScoreMapper;
 
     private final UserService userService;
 
@@ -73,9 +85,10 @@ public class AuditServiceImpl implements AuditService {
     @Override
     public AuditDetailResp queryUserDetailById(Long id) {
         User user = userService.queryUserById(id);
-        // TODO 学生的班级信息？
         AuditDetailResp auditDetailResp = new AuditDetailResp();
+        ClassPO classPO = classMapper.selectByPrimaryKey(user.getClassId());
         BeanUtils.copyProperties(user, auditDetailResp);
+        auditDetailResp.setClassName(classPO.getName());
         return auditDetailResp;
     }
 
@@ -87,6 +100,19 @@ public class AuditServiceImpl implements AuditService {
             studentPO.setId(user.getId());
             studentPO.setAudit(status);
             studentMapper.updateByPrimaryKey(studentPO);
+            // 根据学生的班级关联的老师，进行选课生成
+            List<Long> courseIdList = courseMapper.queryCourseIdListByClassId(user.getClassId());
+            List<StudentScorePO> studentScorePOList = Lists.newArrayList();
+            if (CollectionUtil.isNotEmpty(courseIdList)) {
+                courseIdList.forEach(t -> {
+                    StudentScorePO studentScorePO = new StudentScorePO();
+                    studentScorePO.setStudentId(user.getId());
+                    studentScorePO.setLinkId(t);
+                    studentScorePO.setLinkType(ScoreLinkTypeEnum.CHOOSE.getIndex());
+                    studentScorePOList.add(studentScorePO);
+                });
+            }
+            studentScoreMapper.insertList(studentScorePOList);
         } else {
             TeacherPO teacherPO = new TeacherPO();
             teacherPO.setId(user.getId());

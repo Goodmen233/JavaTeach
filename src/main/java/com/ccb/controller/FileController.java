@@ -2,12 +2,10 @@ package com.ccb.controller;
 
 import cn.hutool.core.bean.BeanUtil;
 import com.ccb.common.urls.FileUrl;
-import com.ccb.domain.common.PageResp;
 import com.ccb.domain.common.ResultInfo;
 import com.ccb.domain.po.FilePO;
 import com.ccb.domain.vo.req.file.DeleteReq;
 import com.ccb.domain.vo.req.file.UploadReq;
-import com.ccb.domain.vo.req.file.ViewReq;
 import com.ccb.service.FileService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -29,14 +27,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class FileController {
 
     private final FileService fileService;
-
-    @ApiOperation("文件列表")
-    @GetMapping(FileUrl.VIEW)
-    @ResponseBody
-    public ResultInfo<PageResp<FilePO>> view(ViewReq viewReq) {
-        // TODO 课程资料已经有，不用写？
-        return ResultInfo.success();
-    }
 
     @ApiOperation("文件上传")
     @GetMapping(FileUrl.UPLOAD)

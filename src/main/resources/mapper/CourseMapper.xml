@@ -13,6 +13,12 @@
             <if test="teacherId != null">
                 and teacher_id = #{teacherId}
             </if>
+            <if test="idList != null and idList.size() != 0">
+                and id in
+                <foreach collection="idList" open="(" close=")" separator="," item="item">
+                    #{item}
+                </foreach>
+            </if>
         </where>
     </sql>
 
@@ -25,5 +31,13 @@
     <select id="countCourse" parameterType="com.ccb.domain.bo.CourseBO" resultType="java.lang.Long">
         select count(*) from t_course
         <include refid="whereCondition"/>
+    </select>
+
+    <select id="queryCourseIdListByClassId" parameterType="java.lang.Long" resultType="java.lang.Long">
+        select course.id
+        from t_class class
+        left join t_course course
+        on class.teacher_id = course.teacher_id
+        where class.id = #{classId}
     </select>
 </mapper>

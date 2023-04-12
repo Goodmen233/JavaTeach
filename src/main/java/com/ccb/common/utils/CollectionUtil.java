@@ -18,4 +18,8 @@ public class CollectionUtil {
     public static <T> boolean isEmpty(Collection<T> collection) {
         return cn.hutool.core.collection.CollectionUtil.isEmpty(collection);
     }
+
+    public static <T> boolean isNotEmpty(Collection<T> collection) {
+        return cn.hutool.core.collection.CollectionUtil.isNotEmpty(collection);
+    }
 }

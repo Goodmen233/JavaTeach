@@ -1,5 +1,6 @@
 package com.ccb.controller;
 
+import cn.hutool.core.bean.BeanUtil;
 import com.ccb.common.annotations.MethodLog;
 import com.ccb.common.enums.UserTypeEnum;
 import com.ccb.common.urls.CommonUrl;
@@ -63,6 +64,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -133,12 +135,14 @@ public class UserController {
     @ResponseBody
     public ResultInfo<PageResp<CoursePO>> course(CourseReq courseReq) {
         // 如果是老师，只展示老师的授课
-        // TODO 如果是学生，展示关联班级的老师的授课
         User user = ApplicationContext.getUser();
         CourseBO courseBO = new CourseBO();
-        BeanUtils.copyProperties(courseReq, courseBO);
+        BeanUtil.copyProperties(courseReq, courseBO);
         if (Objects.equals(UserTypeEnum.TEACHER.getIndex(), user.getUserType())) {
             courseBO.setTeacherId(user.getId());
+        } else if (Objects.equals(UserTypeEnum.STUDENT.getIndex(), user.getUserType())) {
+            List<Long> idList = courseService.queryCourseIdListByClassId(user.getClassId());
+            courseBO.setIdList(idList);
         }
         return ResultInfo.success(courseService.queryCourse(courseBO));
     }
@@ -219,8 +223,7 @@ public class UserController {
     @ResponseBody
     public ResultInfo<PageResp<SharePO>> share(@RequestBody ShareReq shareReq) {
         ShareBO shareBO = new ShareBO();
-        // TODO List没有拷贝？
-        BeanUtils.copyProperties(shareReq, shareBO);
+        BeanUtil.copyProperties(shareReq, shareBO);
         return ResultInfo.success(shareService.queryShare(shareBO));
     }
 

@@ -5,6 +5,8 @@ import com.ccb.domain.common.PageResp;
 import com.ccb.domain.po.CoursePO;
 import com.ccb.domain.vo.resp.teacher.ScoreStaticsResp;
 
+import java.util.List;
+
 /**
  * @Description: 课程服务
  * @Author: CCB
@@ -34,5 +36,13 @@ public interface CourseService {
      * @return
      */
     ScoreStaticsResp courseStatics(Long id);
+
+    /**
+     * 通过班级id查询课程id
+     *
+     * @param classId
+     * @return
+     */
+    List<Long> queryCourseIdListByClassId(Long classId);
 
 }

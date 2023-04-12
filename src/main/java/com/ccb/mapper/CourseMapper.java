@@ -27,4 +27,12 @@ public interface CourseMapper extends BaseMapper<CoursePO> {
      * @return
      */
     Long countCourse(CourseBO courseBO);
+
+    /**
+     * 通过班级id查询课程id
+     *
+     * @param classId
+     * @return
+     */
+    List<Long> queryCourseIdListByClassId(Long classId);
 }

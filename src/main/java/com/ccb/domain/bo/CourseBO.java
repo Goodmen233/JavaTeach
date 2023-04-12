@@ -3,6 +3,8 @@ package com.ccb.domain.bo;
 import com.ccb.domain.common.PageBO;
 import lombok.Data;
 
+import java.util.List;
+
 /**
  * @Description: 课程BO
  * @Author: CCB
@@ -15,6 +17,11 @@ public class CourseBO extends PageBO {
      * 课程id
      */
     private Long id;
+
+    /**
+     * 课程id集合
+     */
+    private List<Long> idList;
 
     /**
      * 名称

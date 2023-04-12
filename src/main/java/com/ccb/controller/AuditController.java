@@ -72,7 +72,6 @@ public class AuditController {
     @ResponseBody
     public ResultInfo<Boolean> auditPass(AuditPassReq auditPassReq) {
         auditService.audit(auditPassReq.getId(), AuditEnum.AUDIT_PASS.getIndex());
-        // TODO CCB 根据学生的班级关联的老师，进行选课生成
         return ResultInfo.success(Boolean.TRUE);
     }
 

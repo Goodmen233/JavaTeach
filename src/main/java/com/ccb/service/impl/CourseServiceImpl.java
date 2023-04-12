@@ -55,4 +55,9 @@ public class CourseServiceImpl implements CourseService {
         scoreStaticsResp.setStudentScoreList(studentScorePOS);
         return scoreStaticsResp;
     }
+
+    @Override
+    public List<Long> queryCourseIdListByClassId(Long classId) {
+        return courseMapper.queryCourseIdListByClassId(classId);
+    }
 }
