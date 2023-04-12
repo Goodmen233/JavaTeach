@@ -3,6 +3,7 @@ package com.ccb.service;
 import com.ccb.domain.bo.CourseBO;
 import com.ccb.domain.common.PageResp;
 import com.ccb.domain.po.CoursePO;
+import com.ccb.domain.vo.resp.teacher.ScoreStaticsResp;
 
 /**
  * @Description: 课程服务
@@ -25,5 +26,13 @@ public interface CourseService {
      * @param id
      */
     void deleteCourseById(Long id);
+
+    /**
+     * 课程统计
+     *
+     * @param id
+     * @return
+     */
+    ScoreStaticsResp courseStatics(Long id);
 
 }

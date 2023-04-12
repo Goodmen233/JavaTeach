@@ -13,8 +13,23 @@ public interface ShareService {
 
     /**
      * 查询分享
+     *
      * @param shareBO
      * @return
      */
     PageResp<SharePO> queryShare(ShareBO shareBO);
+
+    /**
+     * 删除分享
+     *
+     * @param id
+     */
+    void deleteShareById(Long id);
+
+    /**
+     * 保存分享
+     *
+     * @param sharePO
+     */
+    void saveShare(SharePO sharePO);
 }

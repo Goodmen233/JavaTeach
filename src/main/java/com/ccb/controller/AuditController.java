@@ -12,14 +12,11 @@ import com.ccb.domain.common.ResultInfo;
 import com.ccb.domain.vo.req.audit.AuditDetailReq;
 import com.ccb.domain.vo.req.audit.AuditFailReq;
 import com.ccb.domain.vo.req.audit.AuditPassReq;
-import com.ccb.domain.vo.req.audit.AuditReq;
 import com.ccb.domain.vo.resp.audit.AuditDetailResp;
 import com.ccb.domain.vo.resp.audit.AuditResp;
 import com.ccb.service.AuditService;
-import com.ccb.service.UserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import javafx.beans.binding.ObjectExpression;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -27,7 +24,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import java.util.List;
 import java.util.Objects;
 
 /**
@@ -76,6 +72,7 @@ public class AuditController {
     @ResponseBody
     public ResultInfo<Boolean> auditPass(AuditPassReq auditPassReq) {
         auditService.audit(auditPassReq.getId(), AuditEnum.AUDIT_PASS.getIndex());
+        // TODO CCB 根据学生的班级关联的老师，进行选课生成
         return ResultInfo.success(Boolean.TRUE);
     }
 

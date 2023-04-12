@@ -4,9 +4,6 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
-import java.util.Date;
-import java.util.List;
-
 /**
  * @Description: 分享发布入参
  * @Author: CCB
@@ -27,8 +24,5 @@ public class SharePublishReq {
 
     @ApiModelProperty("关联课程id")
     private Long courseId;
-
-    @ApiModelProperty("标签名称集合")
-    private List<String> tagList;
 
 }

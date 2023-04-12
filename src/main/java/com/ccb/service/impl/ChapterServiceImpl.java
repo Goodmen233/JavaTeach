@@ -1,5 +1,6 @@
 package com.ccb.service.impl;
 
+import cn.hutool.core.bean.BeanUtil;
 import com.ccb.domain.po.ChapterContentPO;
 import com.ccb.domain.po.ChapterPO;
 import com.ccb.domain.vo.req.teacher.ChapterContentModifyReq;
@@ -7,11 +8,15 @@ import com.ccb.domain.vo.resp.user.ChapterTreeResp;
 import com.ccb.mapper.ChapterContentMapper;
 import com.ccb.mapper.ChapterMapper;
 import com.ccb.service.ChapterService;
+import com.ccb.service.FileService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import tk.mybatis.mapper.entity.Example;
 
 import java.util.Comparator;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 /**
@@ -26,6 +31,8 @@ public class ChapterServiceImpl implements ChapterService {
     private final ChapterMapper chapterMapper;
 
     private final ChapterContentMapper chapterContentMapper;
+
+    private final FileService fileService;
 
     @Override
     public ChapterTreeResp queryChapterTree(Long courseId) {
@@ -42,5 +49,46 @@ public class ChapterServiceImpl implements ChapterService {
     @Override
     public ChapterContentPO queryChapterContentByChapterId(Long chapterId) {
         return chapterContentMapper.queryChapterContentByChapterId(chapterId);
+    }
+
+    @Override
+    public void saveChapter(ChapterPO chapterPO) {
+        if (Objects.isNull(chapterPO.getId())) {
+            chapterMapper.insertSelective(chapterPO);
+        } else {
+            chapterMapper.updateByPrimaryKey(chapterPO);
+        }
+    }
+
+    @Override
+    public void deleteChapterById(Long id) {
+        chapterMapper.deleteByPrimaryKey(id);
+    }
+
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public void saveChapterContent(ChapterContentModifyReq chapterContentModifyReq) {
+        // 保存章节内容
+        ChapterContentPO chapterContentPO = new ChapterContentPO();
+        BeanUtil.copyProperties(chapterContentModifyReq, chapterContentPO);
+        if (Objects.isNull(chapterContentPO.getId())) {
+            chapterContentMapper.insertSelective(chapterContentPO);
+        } else {
+            chapterContentMapper.updateByPrimaryKey(chapterContentPO);
+        }
+        // 章节设置章节内容id
+        Example example = new Example(ChapterPO.class);
+        example.clear();
+        example.createCriteria().andEqualTo("chapter_content_id", chapterContentModifyReq.getChapterId());
+        ChapterPO chapterPO = new ChapterPO();
+        chapterPO.setChapterContentId(chapterContentPO.getId());
+        chapterMapper.updateByExampleSelective(chapterPO, example);
+        // 保存文件
+        fileService.saveFile(chapterContentModifyReq.getFileList(), chapterContentPO.getId());
+    }
+
+    @Override
+    public void deleteChapterContentById(Long id) {
+        chapterContentMapper.deleteByPrimaryKey(id);
     }
 }

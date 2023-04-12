@@ -8,6 +8,8 @@ import com.ccb.service.ShareService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.Objects;
+
 /**
  * @Description: 分享服务实现
  * @Author: CCB
@@ -25,5 +27,19 @@ public class ShareServiceImpl implements ShareService {
         page.setRows(shareMapper.queryShare(shareBO));
         page.setTotal(shareMapper.countShare(shareBO));
         return page;
+    }
+
+    @Override
+    public void deleteShareById(Long id) {
+        shareMapper.deleteByPrimaryKey(id);
+    }
+
+    @Override
+    public void saveShare(SharePO sharePO) {
+        if (Objects.isNull(sharePO.getId())) {
+            shareMapper.insertSelective(sharePO);
+        } else {
+            shareMapper.updateByPrimaryKey(sharePO);
+        }
     }
 }

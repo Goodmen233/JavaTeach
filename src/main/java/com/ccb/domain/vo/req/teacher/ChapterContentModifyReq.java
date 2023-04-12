@@ -1,5 +1,6 @@
 package com.ccb.domain.vo.req.teacher;
 
+import com.ccb.domain.po.FilePO;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -24,6 +25,6 @@ public class ChapterContentModifyReq {
     @ApiModelProperty("章节id")
     private Long chapterId;
 
-    @ApiModelProperty("文件id集合")
-    private List<Long> fileIdList;
+    @ApiModelProperty("文件集合，传文件的URL和关联类型")
+    private List<FilePO> fileList;
 }

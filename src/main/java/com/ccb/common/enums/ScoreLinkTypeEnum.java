@@ -22,13 +22,14 @@ public enum ScoreLinkTypeEnum implements IEnum {
     /**
      * 选课，暂无成绩
      */
-    CHOOSE(99, "选课")
+    CHOOSE(2, "选课标识")
 
     ;
 
     public static final String KEY_VALUE = "{ " +
             "0-课程 " +
             "1-作业 " +
+            "2-选课标识 " +
             "}";
 
     ScoreLinkTypeEnum(Integer index, String name) {

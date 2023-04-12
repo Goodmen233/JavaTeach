@@ -51,6 +51,6 @@ public class ChapterPO implements Serializable {
     * 关联章节内容id
     */
     @ApiModelProperty("关联章节内容id")
-    private Long tChapterContentId;
+    private Long chapterContentId;
 
 }
