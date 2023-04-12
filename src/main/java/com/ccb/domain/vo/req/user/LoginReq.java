@@ -1,10 +1,11 @@
 package com.ccb.domain.vo.req.user;
 
 import com.ccb.common.enums.UserTypeEnum;
-import com.sun.istack.internal.NotNull;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
+
+import javax.validation.constraints.NotNull;
 
 /**
  * @Description: 登录入参
