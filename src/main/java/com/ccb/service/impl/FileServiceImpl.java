@@ -38,10 +38,12 @@ public class FileServiceImpl implements FileService {
 
     @Override
     public FilePO queryAvatar(Long userId) {
-        FileBO fileBO = new FileBO();
-        fileBO.setLinkId(userId);
-        fileBO.setLinkType(FileLinkTypeEnum.USER_AVATAR.getIndex());
-        List<FilePO> filePOS = fileMapper.queryFile(fileBO);
+        Example example = new Example(FilePO.class);
+        example.clear();
+        example.createCriteria()
+                .andEqualTo("link_id", userId)
+                .andEqualTo("link_type", FileLinkTypeEnum.USER_AVATAR.getIndex());
+        List<FilePO> filePOS = fileMapper.selectByExample(example);
         if (CollectionUtil.isSingleElement(filePOS)) {
             return filePOS.get(0);
         } else {

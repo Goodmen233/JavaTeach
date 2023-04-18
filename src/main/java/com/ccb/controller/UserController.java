@@ -257,7 +257,7 @@ public class UserController {
     @ApiOperation("评论删除")
     @GetMapping(CommonUrl.COMMENT_DELETE)
     @ResponseBody
-    public ResultInfo<Boolean> comment(CommentDeleteReq commentDeleteReq) {
+    public ResultInfo<Boolean> commentDelete(CommentDeleteReq commentDeleteReq) {
         commentService.deleteCommentById(commentDeleteReq.getId());
         return ResultInfo.success(Boolean.TRUE);
     }

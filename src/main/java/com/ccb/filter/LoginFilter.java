@@ -1,7 +1,9 @@
 package com.ccb.filter;
 
 import com.alibaba.fastjson.JSON;
+import com.ccb.common.constants.CommonConstant;
 import com.ccb.common.utils.RedisUtil;
+import com.ccb.context.ApplicationContext;
 import com.ccb.domain.common.ResultInfo;
 import lombok.extern.slf4j.Slf4j;
 
@@ -39,10 +41,13 @@ public class LoginFilter extends HttpFilter {
         String token = req.getHeader("token");
         if (! RedisUtil.containsValueKey(token)) {
             log.error("[{}]请求中，登录状态过期", req.getRequestURI());
+            ApplicationContext.removeUser();
             PrintWriter writer=resp.getWriter();
             writer.write(JSON.toJSONString(ResultInfo.tokenError()));
             writer.flush();
             return;
+        } else {
+            RedisUtil.cacheValue(token, RedisUtil.getValue(token), CommonConstant.REDIS_EXPIRED_TIME);
         }
         chain.doFilter(req, resp);
     }
