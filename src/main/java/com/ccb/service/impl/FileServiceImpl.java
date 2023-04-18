@@ -41,11 +41,13 @@ public class FileServiceImpl implements FileService {
         Example example = new Example(FilePO.class);
         example.clear();
         example.createCriteria()
-                .andEqualTo("link_id", userId)
-                .andEqualTo("link_type", FileLinkTypeEnum.USER_AVATAR.getIndex());
+                .andEqualTo("linkId", userId)
+                .andEqualTo("linkType", FileLinkTypeEnum.USER_AVATAR.getIndex());
         List<FilePO> filePOS = fileMapper.selectByExample(example);
         if (CollectionUtil.isSingleElement(filePOS)) {
             return filePOS.get(0);
+        } else if (CollectionUtil.isEmpty(filePOS)) {
+            return new FilePO();
         } else {
             throw new BizException("查询用户头像异常");
         }
@@ -73,8 +75,8 @@ public class FileServiceImpl implements FileService {
         Example example = new Example(FilePO.class);
         example.clear();
         example.createCriteria()
-                .andEqualTo("link_id", linkId)
-                .andIn("link_type", linkTypeList);
+                .andEqualTo("linkId", linkId)
+                .andIn("linkType", linkTypeList);
         fileMapper.deleteByExample(example);
         fileList.forEach(t -> {
             t.setLinkId(linkId);

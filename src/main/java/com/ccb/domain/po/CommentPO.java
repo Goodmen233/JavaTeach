@@ -5,6 +5,10 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -15,6 +19,7 @@ import java.util.Date;
  */
 @Data
 @ApiModel("评论信息")
+@Table(name = "t_comment")
 public class CommentPO implements Serializable {
 
     private static final long serialVersionUID = 427802600685421038L;
@@ -23,6 +28,8 @@ public class CommentPO implements Serializable {
     * 评论id
     */
     @ApiModelProperty("评论id")
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     /**
     * 内容

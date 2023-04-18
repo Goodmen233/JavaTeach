@@ -5,6 +5,10 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import java.io.Serializable;
 
 /**
@@ -14,6 +18,7 @@ import java.io.Serializable;
  */
 @Data
 @ApiModel("文件信息")
+@Table(name = "t_file")
 public class FilePO implements Serializable {
 
     private static final long serialVersionUID = 3827848778337873081L;
@@ -22,6 +27,8 @@ public class FilePO implements Serializable {
     * 文件id
     */
     @ApiModelProperty("文件id")
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     /**

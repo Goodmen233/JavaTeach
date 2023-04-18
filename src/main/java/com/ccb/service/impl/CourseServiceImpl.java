@@ -49,8 +49,8 @@ public class CourseServiceImpl implements CourseService {
         Example example = new Example(StudentScorePO.class);
         example.clear();
         example.createCriteria()
-                .andEqualTo("link_type", ScoreLinkTypeEnum.SOURCE.getIndex())
-                .andEqualTo("link_id", id);
+                .andEqualTo("linkType", ScoreLinkTypeEnum.SOURCE.getIndex())
+                .andEqualTo("linkId", id);
         List<StudentScorePO> studentScorePOS = studentScoreMapper.selectByExample(example);
         scoreStaticsResp.setStudentScoreList(studentScorePOS);
         return scoreStaticsResp;

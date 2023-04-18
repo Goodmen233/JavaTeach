@@ -5,6 +5,10 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import java.io.Serializable;
 
 /**
@@ -14,6 +18,7 @@ import java.io.Serializable;
  */
 @Data
 @ApiModel("学生信息")
+@Table(name = "t_student")
 public class StudentPO extends UserPO implements Serializable {
 
     private static final long serialVersionUID = -2882016843530189777L;
@@ -22,6 +27,8 @@ public class StudentPO extends UserPO implements Serializable {
     * 学生id
     */
     @ApiModelProperty("学生id")
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     /**

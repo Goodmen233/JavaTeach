@@ -4,6 +4,10 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -14,6 +18,7 @@ import java.util.Date;
  */
 @Data
 @ApiModel("作业/练习表")
+@Table(name = "t_exercise")
 public class ExercisePO implements Serializable {
 
     private static final long serialVersionUID = 2554051715295764640L;
@@ -22,6 +27,8 @@ public class ExercisePO implements Serializable {
     * 作业/练习id
     */
     @ApiModelProperty("作业/练习id")
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     /**

@@ -274,7 +274,7 @@ public class UserServiceImpl implements UserService {
         Example example = new Example(ClassPO.class);
         example.clear();
         example.createCriteria()
-                .andEqualTo("teacher_id", id);
+                .andEqualTo("teacherId", id);
         List<ClassPO> classPOS = classMapper.selectByExample(example);
         com.ccb.domain.vo.resp.teacher.PersonalCenterResp personalCenterResp = new com.ccb.domain.vo.resp.teacher.PersonalCenterResp();
         BeanUtils.copyProperties(user, personalCenterResp);

@@ -13,7 +13,7 @@ import java.util.Objects;
 @Data
 public class ApplicationContext {
 
-    private static ThreadLocal<User> userThreadLocal;
+    private static ThreadLocal<User> userThreadLocal = new ThreadLocal<>();
 
     public static void setUser(User user) {
         userThreadLocal.set(user);

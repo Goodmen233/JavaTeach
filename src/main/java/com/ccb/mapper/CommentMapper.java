@@ -1,5 +1,6 @@
 package com.ccb.mapper;
 
+import com.ccb.basemapper.BaseMapper;
 import com.ccb.domain.bo.CommentBO;
 import com.ccb.domain.po.CommentPO;
 

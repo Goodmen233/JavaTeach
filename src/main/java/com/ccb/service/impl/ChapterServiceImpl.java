@@ -79,7 +79,7 @@ public class ChapterServiceImpl implements ChapterService {
         // 章节设置章节内容id
         Example example = new Example(ChapterPO.class);
         example.clear();
-        example.createCriteria().andEqualTo("chapter_content_id", chapterContentModifyReq.getChapterId());
+        example.createCriteria().andEqualTo("chapterContentId", chapterContentModifyReq.getChapterId());
         ChapterPO chapterPO = new ChapterPO();
         chapterPO.setChapterContentId(chapterContentPO.getId());
         chapterMapper.updateByExampleSelective(chapterPO, example);
