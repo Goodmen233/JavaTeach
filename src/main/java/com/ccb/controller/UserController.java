@@ -5,6 +5,7 @@ import com.ccb.common.annotations.MethodLog;
 import com.ccb.common.enums.UserTypeEnum;
 import com.ccb.common.urls.CommonUrl;
 import com.ccb.common.urls.UserUrl;
+import com.ccb.common.utils.PageUtil;
 import com.ccb.common.utils.RedisUtil;
 import com.ccb.context.ApplicationContext;
 import com.ccb.domain.bo.CommentBO;
@@ -144,6 +145,7 @@ public class UserController {
             List<Long> idList = courseService.queryCourseIdListByClassId(user.getClassId());
             courseBO.setIdList(idList);
         }
+        PageUtil.checkPage(courseBO);
         return ResultInfo.success(courseService.queryCourse(courseBO));
     }
 
@@ -173,6 +175,7 @@ public class UserController {
     public ResultInfo<PageResp<ExerciseBO>> exercise(ExerciseReq exerciseReq) {
         ExerciseQueryBO exerciseQueryBO = new ExerciseQueryBO();
         BeanUtils.copyProperties(exerciseReq, exerciseQueryBO);
+        PageUtil.checkPage(exerciseQueryBO);
         return ResultInfo.success(exerciseService.queryExercise(exerciseQueryBO));
     }
 
@@ -184,6 +187,7 @@ public class UserController {
         FileBO fileBO = new FileBO();
         BeanUtils.copyProperties(resourceReq, fileBO);
         fileBO.setLinkId(resourceReq.getCourseId());
+        PageUtil.checkPage(fileBO);
         return ResultInfo.success(fileService.queryFile(fileBO));
     }
 
@@ -194,6 +198,7 @@ public class UserController {
     public ResultInfo<PageResp<ForumPO>> forum(ForumReq forumReq) {
         ForumBO forumBO = new ForumBO();
         BeanUtils.copyProperties(forumReq, forumBO);
+        PageUtil.checkPage(forumBO);
         return ResultInfo.success(forumService.queryForum(forumBO));
     }
 
@@ -224,6 +229,7 @@ public class UserController {
     public ResultInfo<PageResp<SharePO>> share(@RequestBody ShareReq shareReq) {
         ShareBO shareBO = new ShareBO();
         BeanUtil.copyProperties(shareReq, shareBO);
+        PageUtil.checkPage(shareBO);
         return ResultInfo.success(shareService.queryShare(shareBO));
     }
 
@@ -234,6 +240,7 @@ public class UserController {
     public ResultInfo<PageResp<CommentPO>> comment(CommentReq commentReq) {
         CommentBO commentBO = new CommentBO();
         BeanUtils.copyProperties(commentReq, commentBO);
+        PageUtil.checkPage(commentBO);
         return ResultInfo.success(commentService.queryComment(commentBO));
     }
 
