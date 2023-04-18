@@ -17,4 +17,9 @@ public interface CommonConstant {
      */
     Integer REDIS_EXPIRED_TIME = 60 * 60;
 
+    /**
+     * 管理员电话
+     */
+    String ADMIN_PHONE = "110120";
+
 }

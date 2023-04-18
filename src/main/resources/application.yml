@@ -34,6 +34,8 @@ spring:
 
 mybatis:
   mapper-locations: mapper/*Mapper.xml
+  configuration:
+    map-underscore-to-camel-case: true
 
 #操作oss需要的一些参数
 aliyun:

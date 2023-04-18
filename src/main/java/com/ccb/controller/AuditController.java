@@ -1,5 +1,6 @@
 package com.ccb.controller;
 
+import com.ccb.common.constants.CommonConstant;
 import com.ccb.common.enums.AuditEnum;
 import com.ccb.common.enums.UserTypeEnum;
 import com.ccb.common.urls.teacher.AuditUrl;
@@ -37,8 +38,6 @@ import java.util.Objects;
 @Api(tags = "审核接口")
 public class AuditController {
 
-    public static final String DEFAULT_PHONE = "110120";
-
     private final AuditService auditService;
 
     @ApiOperation("待审核列表")
@@ -51,7 +50,7 @@ public class AuditController {
         }
         AuditBO auditBO = new AuditBO();
         auditBO.setPhone(user.getPhone());
-        if (Objects.equals(DEFAULT_PHONE, user.getPhone())) {
+        if (Objects.equals(CommonConstant.ADMIN_PHONE, user.getPhone())) {
             auditBO.setIsAuditStudent(Boolean.TRUE);
         } else {
             auditBO.setIsAuditStudent(Boolean.FALSE);

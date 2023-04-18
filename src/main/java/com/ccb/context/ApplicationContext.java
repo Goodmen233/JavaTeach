@@ -13,21 +13,28 @@ import java.util.Objects;
 @Data
 public class ApplicationContext {
 
+    private static User user = null;
+
     private static ThreadLocal<User> userThreadLocal = new ThreadLocal<>();
 
-    public static void setUser(User user) {
-        userThreadLocal.set(user);
+    public static synchronized void setUser(User user0) {
+        user = user0;
+        userThreadLocal.set(user0);
     }
 
     public static User getUser() {
-        User user = userThreadLocal.get();
-        if (Objects.isNull(user)) {
-            throw new RuntimeException("获取用户信息异常");
+        User user0 = userThreadLocal.get();
+        if (Objects.isNull(user0)) {
+            if (Objects.isNull(user)) {
+                throw new RuntimeException("获取用户信息异常");
+            }
+            user0 = user;
         }
-        return user;
+        return user0;
     }
 
-    public static void removeUser() {
+    public static synchronized void removeUser() {
+        user = null;
         userThreadLocal.remove();
     }
 

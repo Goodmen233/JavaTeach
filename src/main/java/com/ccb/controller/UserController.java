@@ -2,6 +2,7 @@ package com.ccb.controller;
 
 import cn.hutool.core.bean.BeanUtil;
 import com.ccb.common.annotations.MethodLog;
+import com.ccb.common.constants.CommonConstant;
 import com.ccb.common.enums.UserTypeEnum;
 import com.ccb.common.urls.CommonUrl;
 import com.ccb.common.urls.UserUrl;
@@ -140,7 +141,9 @@ public class UserController {
         CourseBO courseBO = new CourseBO();
         BeanUtil.copyProperties(courseReq, courseBO);
         if (Objects.equals(UserTypeEnum.TEACHER.getIndex(), user.getUserType())) {
-            courseBO.setTeacherId(user.getId());
+            if (!Objects.equals(CommonConstant.ADMIN_PHONE, user.getPhone())) {
+                courseBO.setTeacherId(user.getId());
+            }
         } else if (Objects.equals(UserTypeEnum.STUDENT.getIndex(), user.getUserType())) {
             List<Long> idList = courseService.queryCourseIdListByClassId(user.getClassId());
             courseBO.setIdList(idList);
