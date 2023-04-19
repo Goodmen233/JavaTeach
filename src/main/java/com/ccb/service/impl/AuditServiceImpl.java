@@ -99,7 +99,7 @@ public class AuditServiceImpl implements AuditService {
             StudentPO studentPO = new StudentPO();
             studentPO.setId(user.getId());
             studentPO.setAudit(status);
-            studentMapper.updateByPrimaryKey(studentPO);
+            studentMapper.updateByPrimaryKeySelective(studentPO);
             // 根据学生的班级关联的老师，进行选课生成
             List<Long> courseIdList = courseMapper.queryCourseIdListByClassId(user.getClassId());
             List<StudentScorePO> studentScorePOList = Lists.newArrayList();
@@ -117,7 +117,7 @@ public class AuditServiceImpl implements AuditService {
             TeacherPO teacherPO = new TeacherPO();
             teacherPO.setId(user.getId());
             teacherPO.setAudit(status);
-            teacherMapper.updateByPrimaryKey(teacherPO);
+            teacherMapper.updateByPrimaryKeySelective(teacherPO);
         }
     }
 

@@ -12,7 +12,7 @@ import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
@@ -29,7 +29,7 @@ public class FileController {
     private final FileService fileService;
 
     @ApiOperation("文件上传")
-    @GetMapping(FileUrl.UPLOAD)
+    @PostMapping(FileUrl.UPLOAD)
     @ResponseBody
     public ResultInfo<FilePO> upload(UploadReq uploadReq) {
         FilePO filePO = new FilePO();
@@ -38,7 +38,7 @@ public class FileController {
     }
 
     @ApiOperation("文件删除")
-    @GetMapping(FileUrl.DELETE)
+    @PostMapping(FileUrl.DELETE)
     @ResponseBody
     public ResultInfo<Boolean> delete(DeleteReq deleteReq) {
         fileService.deleteFileById(deleteReq.getId());

@@ -18,8 +18,8 @@ import java.io.Serializable;
  */
 @Data
 @ApiModel("教师信息")
-@Table(name = "t_teach")
-public class TeacherPO extends UserPO implements Serializable {
+@Table(name = "t_teacher")
+public class TeacherPO implements Serializable {
 
     private static final long serialVersionUID = 2776557383202405382L;
 

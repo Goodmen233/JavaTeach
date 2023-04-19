@@ -288,13 +288,15 @@ public class UserServiceImpl implements UserService {
         TeacherPO teacherPO = new TeacherPO();
         BeanUtils.copyProperties(personalCenterModifyReq, teacherPO);
         teacherMapper.updateByPrimaryKey(teacherPO);
-        Example example = new Example(ClassPO.class);
-        example.clear();
-        example.createCriteria()
-                .andIn("id", personalCenterModifyReq.getClassIdList());
-        ClassPO classPO = new ClassPO();
-        classPO.setTeacherId(personalCenterModifyReq.getId());
-        classMapper.updateByExample(classPO, example);
+        if (CollectionUtil.isNotEmpty(personalCenterModifyReq.getClassIdList())) {
+            Example example = new Example(ClassPO.class);
+            example.clear();
+            example.createCriteria()
+                    .andIn("id", personalCenterModifyReq.getClassIdList());
+            ClassPO classPO = new ClassPO();
+            classPO.setTeacherId(personalCenterModifyReq.getId());
+            classMapper.updateByExampleSelective(classPO, example);
+        }
     }
 
     @Override
