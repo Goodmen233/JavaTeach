@@ -28,9 +28,9 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class StudentProblemServiceImpl implements StudentProblemService {
 
-    private StudentProblemMapper studentProblemMapper;
+    private final StudentProblemMapper studentProblemMapper;
 
-    private ProblemMapper problemMapper;
+    private final ProblemMapper problemMapper;
 
     @Override
     public void exerciseSubmit(ExerciseSubmitReq exerciseSubmitReq) {
@@ -38,9 +38,7 @@ public class StudentProblemServiceImpl implements StudentProblemService {
         List<StudentProblemPO> insertAnswer = answerList.stream().filter(t -> Objects.isNull(t.getId())).collect(Collectors.toList());
         List<StudentProblemPO> updateAnswer = answerList.stream().filter(t -> !Objects.isNull(t.getId())).collect(Collectors.toList());
         studentProblemMapper.insertList(insertAnswer);
-        updateAnswer.forEach(t -> {
-            studentProblemMapper.updateByPrimaryKey(t);
-        });
+        updateAnswer.forEach(studentProblemMapper::updateByPrimaryKey);
     }
 
     @Override

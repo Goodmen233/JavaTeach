@@ -249,13 +249,13 @@ public class UserController {
 
     @MethodLog
     @ApiOperation("发布评论")
-    @GetMapping(CommonUrl.COMMENT_PUBLISH)
+    @PostMapping(CommonUrl.COMMENT_PUBLISH)
     @ResponseBody
-    public ResultInfo<Boolean> commentPublish(CommentPublishReq commentPublishReq) {
+    public ResultInfo<Boolean> commentPublish(@RequestBody CommentPublishReq commentPublishReq) {
         // 获取用户信息进行处理
         User user = ApplicationContext.getUser();
         CommentPO commentPO = new CommentPO();
-        BeanUtils.copyProperties(commentPublishReq, commentPO);
+        BeanUtil.copyProperties(commentPublishReq, commentPO);
         commentPO.setUserId(user.getId());
         commentPO.setUserName(user.getName());
         commentPO.setUserAvatar(user.getAvatarUrl());
