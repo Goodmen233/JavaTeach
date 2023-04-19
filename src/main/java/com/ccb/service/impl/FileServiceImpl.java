@@ -71,6 +71,9 @@ public class FileServiceImpl implements FileService {
     @Override
     @Transactional(rollbackFor = Exception.class)
     public void saveFile(List<FilePO> fileList, Long linkId) {
+        if (CollectionUtil.isEmpty(fileList)) {
+            return;
+        }
         List<Integer> linkTypeList = fileList.stream().map(FilePO::getLinkType).distinct().collect(Collectors.toList());
         Example example = new Example(FilePO.class);
         example.clear();
