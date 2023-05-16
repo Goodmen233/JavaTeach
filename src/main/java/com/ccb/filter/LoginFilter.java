@@ -9,7 +9,6 @@ import lombok.extern.slf4j.Slf4j;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -18,12 +17,13 @@ import java.io.PrintWriter;
 
 /**
  * @Description: 判断请求头里面是否有登录的token信息，有的话进行判定，有效才放行
+ * //TODO 引入mockSpring，过滤器报错
  * @Author: CCB
  * @Date: 2023/2/10 11:18
  */
 @Slf4j
-@WebFilter(urlPatterns = {"/file/*", "/teacher/*", "/student/*", "/common/*", "/audit/*"})
-public class LoginFilter extends HttpFilter {
+//@WebFilter(urlPatterns = {"/file/*", "/teacher/*", "/student/*", "/common/*", "/audit/*"})
+public abstract class LoginFilter extends HttpFilter {
 
     private static final long serialVersionUID = 6403614881115304399L;
 
