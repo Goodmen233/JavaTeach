@@ -26,4 +26,9 @@ public class FileUrl {
      * 删除文件
      */
     public static final String DELETE = PREFIX + "/delete";
+
+    /**
+     * 上传文件-new
+     */
+    public static final String IMG_UPLOAD = PREFIX + "/imgUpload";
 }

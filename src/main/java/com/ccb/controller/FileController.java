@@ -2,6 +2,7 @@ package com.ccb.controller;
 
 import cn.hutool.core.bean.BeanUtil;
 import com.ccb.common.urls.FileUrl;
+import com.ccb.common.utils.OssUtil;
 import com.ccb.domain.common.ResultInfo;
 import com.ccb.domain.po.FilePO;
 import com.ccb.domain.vo.req.file.DeleteReq;
@@ -13,7 +14,9 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  * @Description: 文件相关接口
@@ -43,6 +46,13 @@ public class FileController {
     public ResultInfo<Boolean> delete(DeleteReq deleteReq) {
         fileService.deleteFileById(deleteReq.getId());
         return ResultInfo.success(Boolean.TRUE);
+    }
+
+    @ApiOperation("文件图片上传-new")
+    @PostMapping(FileUrl.IMG_UPLOAD)
+    @ResponseBody
+    public ResultInfo<String> imageUpload(@RequestPart("upload")MultipartFile file) {
+        return ResultInfo.success(OssUtil.uploadOneFile(file));
     }
 
 }
