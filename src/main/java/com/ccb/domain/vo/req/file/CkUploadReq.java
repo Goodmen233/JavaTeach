@@ -3,6 +3,7 @@ package com.ccb.domain.vo.req.file;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  * @Description: CK文件上传入参
@@ -14,7 +15,7 @@ import lombok.Data;
 public class CkUploadReq {
 
     @ApiModelProperty("文件base64编码")
-    private String upload;
+    private MultipartFile upload;
 
     @ApiModelProperty("ckCsrfToken")
     private String ckCsrfToken;

@@ -1,6 +1,8 @@
 package com.ccb.controller;
 
 import com.ccb.common.utils.OssUtil;
+import com.ccb.domain.vo.req.file.CkUploadReq;
+import com.google.common.collect.Maps;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
@@ -11,7 +13,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
 /**
  * @Description: OSS控制层
@@ -46,6 +51,17 @@ public class OssController {
     public boolean deleteFile(@RequestBody String fileUrl) {
         //返回是否删除成功
         return OssUtil.deleteFile(fileUrl);
+    }
+
+    @ApiOperation("文件图片上传-new")
+    @PostMapping("imgUpload")
+    @ResponseBody
+    public Map<String, Object> imageUpload(CkUploadReq ckUploadReq) {
+        HashMap<String, Object> map = Maps.newHashMap();
+        map.put("uploaded", 1);
+        map.put("url", OssUtil.uploadOneFile(ckUploadReq.getUpload()));
+        map.put("fileName", UUID.randomUUID());
+        return map;
     }
 
 }
