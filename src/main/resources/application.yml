@@ -1,0 +1,46 @@
+server:
+  servlet:
+    context-path: /JavaTeach
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://8.130.19.242:3306/java_teach?useUnicode=true&characterEncoding=utf8&serverTimezone=UTC&useSSL=false&autoReconnect=true
+    username: root
+    password: passw0rd
+  redis:
+    host: 8.130.19.242
+    port: 6379
+    password: passw0rd
+    database: 0
+    timeout: 5000
+    lettuce:
+      pool:
+        max-idle: 8
+        min-idle: 1
+        max-wait: 10000
+        max-active: 8
+  # 邮箱配置
+  mail:
+    username: 841306289@qq.com
+    password: ecfhswnqlfiybdia
+    protocol: smtp
+    default-encoding: utf-8
+    properties:
+      smtp:
+        ssl:
+          enable: true
+    host: smtp.qq.com
+
+mybatis:
+  mapper-locations: mapper/*Mapper.xml
+  configuration:
+    map-underscore-to-camel-case: true
+
+#操作oss需要的一些参数
+aliyun:
+  accessKeyId: LTAI5t8bgbDBDVVjkSFgm6mZ       # 阿里云的accessKeyId
+  secretAccessKey: JNvEyeJhre5qUmPzMj6nrTweySBn9B   # accessKey 密码
+  oss:
+    endPoint: oss-cn-beijing.aliyuncs.com     # Endpoint:在阿里云oss控制台查看自己使用的endpoint
+    bucketName: java-teach   # bucket 名称

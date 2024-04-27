@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.ccb.mapper.CommentMapper">
+    <sql id="whereCondition">
+        <where>
+            <if test="linkId != null">
+                and link_id = #{linkId}
+            </if>
+            <if test="linkType != null">
+                and link_type = #{linkType}
+            </if>
+        </where>
+    </sql>
+    <select id="queryComment" parameterType="com.ccb.domain.bo.CommentBO" resultType="com.ccb.domain.po.CommentPO">
+        select * from t_comment
+        <include refid="whereCondition"/>
+        limit #{pageNo}, #{pageSize}
+    </select>
+
+    <select id="countComment"  parameterType="com.ccb.domain.bo.CommentBO" resultType="java.lang.Long">
+        select count(*) from t_comment
+        <include refid="whereCondition"/>
+    </select>
+
+</mapper>
